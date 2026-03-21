@@ -22,6 +22,20 @@ npm run build   # production build
 npm run start   # run production server
 ```
 
+## Push to GitHub
+
+This folder is a **git** repo with `main` and an initial commit. `node_modules`, `.next`, and `.env` are ignored.
+
+1. On [GitHub → New repository](https://github.com/new), create a repo (e.g. `portfolio-website`). **Do not** add a README, `.gitignore`, or license (this project already has them).
+2. In the project directory, connect and push (replace `YOUR_USER` and `YOUR_REPO`):
+
+```bash
+git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
+git push -u origin main
+```
+
+If GitHub asks you to log in, use a [Personal Access Token](https://github.com/settings/tokens) as the password (HTTPS), or set up [SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) and use `git@github.com:YOUR_USER/YOUR_REPO.git` instead.
+
 ## Customize content
 
 | What | Where |
