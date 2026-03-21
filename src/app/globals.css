@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Rich dark base (#0a0910) — polished glass, smooth purple depth, readable type.
+ */
+
+.glass-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(139, 92, 246, 0.07) 42%,
+    rgba(18, 16, 28, 0.88) 100%
+  );
+  backdrop-filter: blur(22px) saturate(155%);
+  -webkit-backdrop-filter: blur(22px) saturate(155%);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.05) inset,
+    0 18px 44px -16px rgba(0, 0, 0, 0.5),
+    0 0 56px -26px rgba(109, 40, 217, 0.32);
+}
+
+.glass-panel:hover {
+  border-color: rgba(196, 181, 253, 0.32);
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.08) inset,
+    0 22px 52px -18px rgba(0, 0, 0, 0.55),
+    0 0 72px -22px rgba(139, 92, 246, 0.38);
+}
+
+.input-aura:focus {
+  outline: none;
+  border-color: rgba(167, 139, 250, 0.5) !important;
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.3),
+    0 0 26px rgba(109, 40, 217, 0.25),
+    0 0 44px rgba(99, 102, 241, 0.1);
+}
+
+@keyframes sheen {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.text-sheen {
+  background: linear-gradient(
+    110deg,
+    #fafafa 0%,
+    #d8b4fe 20%,
+    #c084fc 42%,
+    #a78bfa 68%,
+    #f5f3ff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sheen 9s ease-in-out infinite alternate;
+}
+
+.ripple-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.bubble-3d-wrap {
+  perspective: 960px;
+  perspective-origin: 50% 40%;
+}
+
+.bubble-3d-inner {
+  display: inline-block;
+  transform-style: preserve-3d;
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(139, 92, 246, 0.14) 36%,
+    rgba(76, 29, 149, 0.2) 70%,
+    rgba(12, 10, 18, 0.75) 100%
+  );
+  border: 1px solid rgba(167, 139, 250, 0.32);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.12) inset,
+    0 -6px 20px rgba(91, 33, 182, 0.12) inset,
+    0 12px 28px rgba(0, 0, 0, 0.45),
+    0 3px 14px rgba(109, 40, 217, 0.22);
+  backface-visibility: hidden;
+}
+
+:root {
+  --bg: #0a0910;
+  --bg-elevated: #12101a;
+  --aura-1: rgba(167, 139, 250, 0.45);
+  --aura-2: rgba(99, 102, 241, 0.32);
+  --aura-3: rgba(109, 40, 217, 0.4);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #f8fafc;
+  background: var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.38);
+  color: #ffffff;
+}
+
+.skills-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.skills-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+html.portfolio-high-contrast body {
+  color: #fafafa;
+}
+html.portfolio-high-contrast .glass-panel {
+  border-color: rgba(216, 180, 254, 0.45) !important;
+}
