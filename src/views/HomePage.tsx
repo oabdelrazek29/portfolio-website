@@ -19,8 +19,10 @@ import { SkillsSection } from "@/components/sections/SkillsSection";
 export function HomePage() {
   useEffect(() => {
     document.documentElement.classList.add("scene-scroll-active");
+    document.body.classList.add("scene-scroll-active");
     return () => {
       document.documentElement.classList.remove("scene-scroll-active");
+      document.body.classList.remove("scene-scroll-active");
     };
   }, []);
 
@@ -29,10 +31,10 @@ export function HomePage() {
       <AnimatedBackground />
       <Navbar />
       <motion.main
-        initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-        className="scene-scroll relative z-10"
+        initial={{ opacity: 0, filter: "blur(4px)" }}
+        animate={{ opacity: 1, filter: "blur(0px)" }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="scene-scroll relative z-10 transform-gpu"
       >
         <div className="scene-step">
           <HeroSection />

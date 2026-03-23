@@ -54,14 +54,18 @@ p {
 
 /* Scene-like scrolling, tuned for smoothness (no rigid hard snapping). */
 @media (min-width: 1024px) {
-  html.scene-scroll-active {
+  html.scene-scroll-active,
+  body.scene-scroll-active {
     scroll-snap-type: y proximity;
     scroll-padding-top: 6.5rem;
+    scroll-behavior: smooth;
   }
 
   .scene-step {
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
-    min-height: 88svh;
+    scroll-snap-stop: always;
+    min-height: 92svh;
+    scroll-margin-top: 6.5rem;
+    will-change: transform;
   }
 }

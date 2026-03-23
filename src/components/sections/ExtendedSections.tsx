@@ -50,7 +50,11 @@ export function ExtendedSections() {
   return (
     <>
       {sectionMeta.map((section, index) => (
-        <section key={section.id} id={section.id} className="relative px-5 py-20 md:px-8 md:py-28">
+        <section
+          key={section.id}
+          id={section.id}
+          className="scene-step relative px-5 py-20 md:px-8 md:py-28"
+        >
           <motion.div
             className={`pointer-events-none absolute ${
               index % 2 === 0 ? "-left-16 top-12" : "-right-16 top-16"
