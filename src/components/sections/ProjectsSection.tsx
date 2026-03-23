@@ -8,6 +8,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { projects } from "../../../data/projects";
+import { SceneLine, SceneStagger } from "@/components/ui/SceneText";
 import { ProjectModal } from "./ProjectModal";
 
 type ProjectItem = {
@@ -40,16 +41,22 @@ export function ProjectsSection() {
           whileInView="show"
           viewport={{ once: true, margin: "-20%" }}
         >
-          <motion.p variants={scene} className="text-sm uppercase tracking-[0.22em] text-purple-300/85">
-            Main Focus
-          </motion.p>
-          <motion.h2 variants={scene} transition={{ delay: 0.16 }} className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl">
-            Featured Projects
-          </motion.h2>
-          <motion.p variants={scene} transition={{ delay: 0.24 }} className="mt-4 max-w-2xl text-base font-light leading-[1.72] text-zinc-300">
-            A curated showcase of in-progress systems, organized by intent, architecture, and
-            current software priorities.
-          </motion.p>
+          <SceneStagger>
+            <SceneLine>
+              <p className="text-sm uppercase tracking-[0.22em] text-purple-300/85">Main Focus</p>
+            </SceneLine>
+            <SceneLine delay={0.08}>
+              <h2 className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl">
+                Featured Projects
+              </h2>
+            </SceneLine>
+            <SceneLine delay={0.16}>
+              <p className="mt-4 max-w-2xl text-base font-light leading-[1.72] text-zinc-300">
+                A curated showcase of in-progress systems, organized by intent, architecture, and
+                current software priorities.
+              </p>
+            </SceneLine>
+          </SceneStagger>
 
           <div className="mt-14 space-y-8">
             {projects.map((project: ProjectItem, index: number) => (

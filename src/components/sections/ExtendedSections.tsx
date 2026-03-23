@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { SceneLine, SceneStagger } from "@/components/ui/SceneText";
 
 const sectionMeta = [
   {
@@ -75,47 +76,31 @@ export function ExtendedSections() {
                 transition={{ duration: 0.96, ease: [0.22, 1, 0.36, 1] }}
                 className={index % 2 === 0 ? "" : "md:order-2"}
               >
-                <motion.p
-                  initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true, margin: "-20%" }}
-                  transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-sm uppercase tracking-[0.2em] text-purple-300/85"
-                >
-                  {section.eyebrow}
-                </motion.p>
-                <motion.h2
-                  initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true, margin: "-20%" }}
-                  transition={{ duration: 0.82, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl"
-                >
-                  {section.title}
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, margin: "-20%" }}
-                  transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-5 max-w-2xl text-base font-light leading-[1.72] text-zinc-300"
-                >
-                  {section.body}
-                </motion.p>
-                <motion.div
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-20%" }}
-                  transition={{ duration: 0.78, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-7"
-                >
-                  <Link
-                    href={section.href}
-                    className="inline-flex rounded-xl border border-purple-400/40 bg-black/40 px-4 py-2 text-sm text-purple-200 transition hover:border-purple-300/60 hover:text-purple-100"
-                  >
-                    Open standalone {section.eyebrow.toLowerCase()} page
-                  </Link>
-                </motion.div>
+                <SceneStagger>
+                  <SceneLine>
+                    <p className="text-sm uppercase tracking-[0.2em] text-purple-300/85">
+                      {section.eyebrow}
+                    </p>
+                  </SceneLine>
+                  <SceneLine delay={0.08}>
+                    <h2 className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl">
+                      {section.title}
+                    </h2>
+                  </SceneLine>
+                  <SceneLine delay={0.16}>
+                    <p className="mt-5 max-w-2xl text-base font-light leading-[1.72] text-zinc-300">
+                      {section.body}
+                    </p>
+                  </SceneLine>
+                  <SceneLine delay={0.22} className="mt-7">
+                    <Link
+                      href={section.href}
+                      className="inline-flex rounded-xl border border-purple-400/40 bg-black/40 px-4 py-2 text-sm text-purple-200 transition hover:border-purple-300/60 hover:text-purple-100"
+                    >
+                      Open standalone {section.eyebrow.toLowerCase()} page
+                    </Link>
+                  </SceneLine>
+                </SceneStagger>
               </motion.div>
 
               <motion.div

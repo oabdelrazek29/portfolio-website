@@ -6,6 +6,7 @@
  */
 
 import { motion } from "framer-motion";
+import { SceneLine, SceneStagger } from "@/components/ui/SceneText";
 
 export function AboutSection() {
   return (
@@ -18,35 +19,23 @@ export function AboutSection() {
         transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="md:col-span-7">
-          <motion.p
-            initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-20%" }}
-            transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
-            className="text-sm uppercase tracking-[0.2em] text-purple-300/85"
-          >
-            About
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-20%" }}
-            transition={{ duration: 0.82, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl"
-          >
-            Who I Am
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-20%" }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 max-w-2xl font-light leading-[1.72] text-zinc-300"
-          >
-            I am a developer and engineer focused on building intelligent systems that connect
-            software with real-world applications. My work spans AI, simulation, and advanced
-            engineering concepts, with a focus on creating tools that evolve and adapt.
-          </motion.p>
+          <SceneStagger>
+            <SceneLine>
+              <p className="text-sm uppercase tracking-[0.2em] text-purple-300/85">About</p>
+            </SceneLine>
+            <SceneLine delay={0.08}>
+              <h2 className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl">
+                Who I Am
+              </h2>
+            </SceneLine>
+            <SceneLine delay={0.16}>
+              <p className="mt-6 max-w-2xl font-light leading-[1.72] text-zinc-300">
+                I am a developer and engineer focused on building intelligent systems that connect
+                software with real-world applications. My work spans AI, simulation, and advanced
+                engineering concepts, with a focus on creating tools that evolve and adapt.
+              </p>
+            </SceneLine>
+          </SceneStagger>
         </div>
 
         <motion.div

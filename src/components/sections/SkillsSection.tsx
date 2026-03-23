@@ -6,6 +6,7 @@
  */
 
 import { motion } from "framer-motion";
+import { SceneLine, SceneStagger } from "@/components/ui/SceneText";
 
 const skills = [
   "Java",
@@ -26,24 +27,18 @@ export function SkillsSection() {
         viewport={{ once: true, margin: "-20%" }}
         transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
       >
-        <motion.p
-          initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, margin: "-20%" }}
-          transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
-          className="text-sm uppercase tracking-[0.2em] text-purple-300/85"
-        >
-          Core Capabilities
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, margin: "-20%" }}
-          transition={{ duration: 0.82, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl"
-        >
-          Skills
-        </motion.h2>
+        <SceneStagger>
+          <SceneLine>
+            <p className="text-sm uppercase tracking-[0.2em] text-purple-300/85">
+              Core Capabilities
+            </p>
+          </SceneLine>
+          <SceneLine delay={0.08}>
+            <h2 className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl">
+              Skills
+            </h2>
+          </SceneLine>
+        </SceneStagger>
 
         <motion.div
           initial={{ opacity: 0 }}
