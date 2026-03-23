@@ -32,11 +32,7 @@ export function ProjectsSection() {
   return (
     <>
       <section id="projects" className="relative px-5 py-20 md:px-8 md:py-28">
-        <motion.div
-          className="pointer-events-none absolute -right-12 top-20 h-44 w-44 rounded-full bg-purple-500/15 blur-3xl"
-          animate={{ y: [0, -12, 0], x: [0, 8, 0], opacity: [0.22, 0.36, 0.22] }}
-          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-        />
+        <div className="pointer-events-none absolute -right-12 top-20 h-44 w-44 rounded-full bg-purple-500/12 blur-3xl" />
         <motion.div
           className="mx-auto max-w-6xl"
           variants={scene}
