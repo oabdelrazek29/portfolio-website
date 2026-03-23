@@ -6,7 +6,8 @@
  */
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { GlowButton } from "@/components/ui/GlowButton";
 
 type ProjectModalProps = {
@@ -24,6 +25,13 @@ type ProjectModalProps = {
 };
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -40,36 +48,34 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
     };
   }, [project]);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
-      {project && (
+      {project ? (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-end justify-center p-4 sm:items-center md:p-8"
+          className="fixed inset-0 z-[300] flex items-end justify-center p-4 sm:items-center md:p-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          transition={{ duration: 0.28, ease: "easeInOut" }}
         >
           <motion.button
             type="button"
             aria-label="Close project"
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black/72 backdrop-blur-sm"
             onClick={onClose}
           />
 
           <motion.article
-            layoutId={`project-card-${project.title}`}
             role="dialog"
             aria-modal="true"
             aria-labelledby="project-modal-title"
-            className="relative z-[101] w-full max-w-2xl rounded-3xl border border-purple-400/30 bg-[#0a0713]/95 p-6 shadow-[0_0_44px_rgba(122,0,255,0.26)] md:p-8"
-            initial={{ opacity: 0, y: 28, scale: 0.94, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: 16, scale: 0.96, filter: "blur(6px)" }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="relative z-[301] max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-purple-400/30 bg-[#0a0713]/95 p-6 shadow-[0_0_44px_rgba(122,0,255,0.26)] md:p-8"
+            initial={{ opacity: 0, y: 18, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -122,13 +128,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               <GlowButton href={project.github} className="from-[#160525]/70 to-[#2a0d3c]/70">
                 View GitHub
               </GlowButton>
-              <GlowButton href={project.demo}>
-                Live Demo
-              </GlowButton>
+              <GlowButton href={project.demo}>Live Demo</GlowButton>
             </div>
           </motion.article>
         </motion.div>
-      )}
-    </AnimatePresence>
+      ) : null}
+    </AnimatePresence>,
+    document.body,
   );
 }

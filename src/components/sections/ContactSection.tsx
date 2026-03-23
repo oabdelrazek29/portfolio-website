@@ -8,14 +8,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { GlowButton } from "@/components/ui/GlowButton";
-const scene = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.84, ease: "easeOut", staggerChildren: 0.1 } },
-};
-const beat = {
-  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
-  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.72, ease: "easeOut" } },
-};
 
 export function ContactSection() {
   const [sent, setSent] = useState(false);
@@ -31,19 +23,37 @@ export function ContactSection() {
     <section id="contact" className="relative px-5 py-20 md:px-8 md:pb-28 md:pt-28">
       <motion.div
         className="mx-auto max-w-6xl"
-        variants={scene}
-        initial="hidden"
-        whileInView="show"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-20%" }}
+        transition={{ duration: 0.96, ease: [0.22, 1, 0.36, 1] }}
       >
-        <motion.p variants={beat} className="text-sm uppercase tracking-[0.2em] text-purple-300/85">
+        <motion.p
+          initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-20%" }}
+          transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
+          className="text-sm uppercase tracking-[0.2em] text-purple-300/85"
+        >
           Contact
         </motion.p>
-        <motion.h2 variants={beat} transition={{ delay: 0.14 }} className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-20%" }}
+          transition={{ duration: 0.82, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl"
+        >
           Get in Touch
         </motion.h2>
 
-        <motion.div variants={beat} transition={{ delay: 0.24 }} className="mt-10 max-w-2xl rounded-3xl border border-purple-500/25 bg-black/45 p-6 md:p-8">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-20%" }}
+          transition={{ duration: 0.84, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-10 max-w-2xl rounded-3xl border border-purple-500/25 bg-black/45 p-6 md:p-8"
+        >
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name" className="text-sm text-zinc-300">

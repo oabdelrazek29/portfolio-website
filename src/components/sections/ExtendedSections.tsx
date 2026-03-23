@@ -56,7 +56,7 @@ export function ExtendedSections() {
               index % 2 === 0 ? "-left-16 top-12" : "-right-16 top-16"
             } h-40 w-40 rounded-full bg-purple-500/15 blur-3xl`}
             animate={{ y: [0, -14, 0], x: [0, index % 2 === 0 ? 6 : -6, 0], opacity: [0.2, 0.34, 0.2] }}
-            transition={{ duration: 12 + index, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 15 + index, repeat: Infinity, ease: [0.22, 1, 0.36, 1] }}
           />
           <div className="mx-auto max-w-6xl">
             <div
@@ -68,14 +68,14 @@ export function ExtendedSections() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20%" }}
-                transition={{ duration: 0.84, ease: "easeOut" }}
+                transition={{ duration: 0.96, ease: [0.22, 1, 0.36, 1] }}
                 className={index % 2 === 0 ? "" : "md:order-2"}
               >
                 <motion.p
                   initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: true, margin: "-20%" }}
-                  transition={{ duration: 0.72, ease: "easeOut" }}
+                  transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
                   className="text-sm uppercase tracking-[0.2em] text-purple-300/85"
                 >
                   {section.eyebrow}
@@ -84,7 +84,7 @@ export function ExtendedSections() {
                   initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: true, margin: "-20%" }}
-                  transition={{ duration: 0.72, delay: 0.14, ease: "easeOut" }}
+                  transition={{ duration: 0.82, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
                   className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl"
                 >
                   {section.title}
@@ -93,7 +93,7 @@ export function ExtendedSections() {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true, margin: "-20%" }}
-                  transition={{ duration: 0.72, delay: 0.24, ease: "easeOut" }}
+                  transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="mt-5 max-w-2xl text-base font-light leading-[1.72] text-zinc-300"
                 >
                   {section.body}
@@ -102,7 +102,7 @@ export function ExtendedSections() {
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-20%" }}
-                  transition={{ duration: 0.68, delay: 0.32, ease: "easeOut" }}
+                  transition={{ duration: 0.78, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   className="mt-7"
                 >
                   <Link
@@ -118,7 +118,7 @@ export function ExtendedSections() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20%" }}
-                transition={{ duration: 0.82, delay: 0.12, ease: "easeOut" }}
+                transition={{ duration: 0.94, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
                 className={index % 2 === 0 ? "" : "md:order-1"}
               >
                 <div className="grid gap-3">
@@ -127,9 +127,13 @@ export function ExtendedSections() {
                       key={item}
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      whileHover={{ y: -2 }}
+                      whileHover={{ y: -1.5 }}
                       viewport={{ once: true, margin: "-20%" }}
-                      transition={{ duration: 0.72, delay: itemIdx * 0.1 + 0.14, ease: "easeOut" }}
+                      transition={{
+                        duration: 0.82,
+                        delay: itemIdx * 0.12 + 0.2,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
                       className="rounded-xl border border-white/10 bg-black/40 p-4 transition-shadow duration-300 hover:shadow-[0_0_18px_rgba(122,0,255,0.22)]"
                     >
                       <p className="text-xs uppercase tracking-[0.16em] text-purple-300/70">

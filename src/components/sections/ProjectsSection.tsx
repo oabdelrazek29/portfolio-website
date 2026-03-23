@@ -26,7 +26,7 @@ export function ProjectsSection() {
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
   const scene = {
     hidden: { opacity: 0, y: 40 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.85, ease: "easeOut" } },
+    show: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } },
   };
 
   return (
@@ -64,8 +64,8 @@ export function ProjectsSection() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20%" }}
-                transition={{ duration: 0.82, delay: index * 0.12, ease: "easeOut" }}
-                whileHover={{ y: -6 }}
+                transition={{ duration: 0.95, delay: index * 0.13, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -3 }}
                 onClick={() => setActiveProject(project)}
                 className={`group grid w-full overflow-hidden rounded-3xl border border-purple-500/25 bg-black/50 text-left transition-all duration-500 hover:border-purple-400/50 hover:shadow-[0_0_34px_rgba(122,0,255,0.3)] md:grid-cols-12 ${
                   index % 2 === 0 ? "" : "md:[&>*:first-child]:order-2"
@@ -117,7 +117,7 @@ export function ProjectsSection() {
                     onClick={(e) => e.stopPropagation()}
                     className="mt-4 block w-fit text-xs text-purple-300/80 underline-offset-4 transition hover:text-purple-200 hover:underline"
                   >
-                    GitHub Placeholder
+                    Open GitHub
                   </a>
                 </div>
               </motion.button>

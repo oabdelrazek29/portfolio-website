@@ -13,7 +13,7 @@ const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.2, delayChildren: 0.08 },
+    transition: { staggerChildren: 0.14, delayChildren: 0.12 },
   },
 };
 
@@ -23,7 +23,7 @@ const item = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.82, ease: "easeOut" },
+    transition: { duration: 1, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -36,16 +36,21 @@ const titleSequence = {
 };
 const titleChar = {
   hidden: { opacity: 0, y: 9, filter: "blur(6px)" },
-  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.58, ease: "easeOut" } },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.66, ease: [0.22, 1, 0.36, 1] },
+  },
 };
 
 export function HeroSection() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 40, damping: 18 });
-  const smoothY = useSpring(mouseY, { stiffness: 40, damping: 18 });
-  const parallaxX = useTransform(smoothX, [0, 1], [-4, 4]);
-  const parallaxY = useTransform(smoothY, [0, 1], [-4, 4]);
+  const smoothX = useSpring(mouseX, { stiffness: 26, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 26, damping: 20 });
+  const parallaxX = useTransform(smoothX, [0, 1], [-3, 3]);
+  const parallaxY = useTransform(smoothY, [0, 1], [-3, 3]);
   const glowOpacity = useTransform(smoothX, [0, 0.5, 1], [0.2, 0.34, 0.2]);
 
   const onMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
@@ -93,7 +98,7 @@ export function HeroSection() {
 
         <motion.p
           variants={item}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          transition={{ duration: 0.96, ease: [0.22, 1, 0.36, 1], delay: 0.22 }}
           className="mt-6 max-w-2xl text-xl font-normal text-purple-100/95 md:text-2xl"
         >
           {subtitle}
@@ -101,7 +106,7 @@ export function HeroSection() {
 
         <motion.p
           variants={item}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.28 }}
+          transition={{ duration: 0.96, ease: [0.22, 1, 0.36, 1], delay: 0.34 }}
           className="mt-6 max-w-3xl text-base font-light leading-[1.72] text-zinc-300 md:text-lg"
         >
           I design and build systems that think, adapt, and push boundaries — from software to
@@ -110,7 +115,7 @@ export function HeroSection() {
 
         <motion.div
           variants={item}
-          transition={{ duration: 0.78, ease: "easeOut", delay: 0.34 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.44 }}
           className="mt-12 flex flex-wrap gap-4"
         >
           <GlowButton href="#projects">View Projects</GlowButton>
