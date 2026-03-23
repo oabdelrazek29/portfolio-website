@@ -1,0 +1,46 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { AnimatedBackground } from "@/components/layout/AnimatedBackground";
+import { Navbar } from "@/components/layout/Navbar";
+
+export default function NotesPage() {
+  return (
+    <>
+      <AnimatedBackground />
+      <Navbar />
+      <main className="relative z-10 px-5 pb-20 pt-32 md:px-8">
+        <section className="mx-auto max-w-5xl rounded-2xl border border-purple-500/25 bg-black/45 p-8">
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-20%" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-sm uppercase tracking-[0.2em] text-purple-300/85"
+          >
+            Notes Page
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-20%" }}
+            transition={{ duration: 0.82, delay: 0.16, ease: "easeOut" }}
+            className="mt-3 text-5xl font-medium text-white"
+          >
+            Freeform Notes
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-20%" }}
+            transition={{ duration: 0.76, delay: 0.26, ease: "easeOut" }}
+            className="mt-6 text-base font-light leading-[1.72] text-zinc-300"
+          >
+            This page is intentionally open-ended. Add architecture notes, design thoughts, links,
+            or rough ideas here before turning them into final project content.
+          </motion.p>
+        </section>
+      </main>
+    </>
+  );
+}

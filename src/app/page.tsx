@@ -1,16 +1,8 @@
-import { siteConfig } from "@/data/portfolio";
-import { fetchGitHubRepos, parseGithubUsername } from "@/lib/github";
 import { HomePage } from "@/views/HomePage";
-
 /**
- * Loads public GitHub repos server-side (revalidates hourly).
- * Set `githubUsername` or a real `githubUrl` in portfolio.ts.
+ * This page renders a single polished portfolio experience.
+ * Keep this file minimal and move all design/content logic into `src/views/HomePage.tsx`.
  */
-
-export default async function Page() {
-  const username =
-    siteConfig.githubUsername?.trim() || parseGithubUsername(siteConfig.githubUrl) || "";
-  const githubRepos = username ? await fetchGitHubRepos(username) : [];
-
-  return <HomePage githubRepos={githubRepos} />;
+export default function Page() {
+  return <HomePage />;
 }

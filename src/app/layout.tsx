@@ -1,28 +1,12 @@
 import type { Metadata } from "next";
-import { DM_Sans, Outfit } from "next/font/google";
-import { siteConfig } from "@/data/portfolio";
+import { PageTransition } from "@/components/layout/PageTransition";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import "./globals.css";
 
-/**
- * Outfit: display / headings — modern, geometric personality.
- * DM Sans: body — clean, highly readable UI type.
- */
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: `${siteConfig.name} — Portfolio`,
-  description: siteConfig.heroSummaryLines.join(" "),
+  title: "Omar Abdelrazek | Portfolio",
+  description:
+    "Engineer. Builder. Creator of intelligent systems. A premium interactive developer portfolio.",
 };
 
 export default function RootLayout({
@@ -32,8 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${dmSans.variable} ${outfit.variable} font-sans antialiased`}>
-        {children}
+      <body className="font-sans antialiased">
+        <PageTransition>
+          {children}
+          <SiteFooter />
+        </PageTransition>
       </body>
     </html>
   );

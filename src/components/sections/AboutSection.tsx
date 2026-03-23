@@ -1,57 +1,60 @@
 "use client";
 
 /**
- * About copy comes from `siteConfig` in src/data/portfolio.ts.
- * When you add aboutImage, drop a file in /public and set siteConfig.aboutImage.
+ * About section.
+ * The text below is intentionally hard-coded per request for brand consistency.
  */
 
-import Image from "next/image";
-import { GlassCard } from "@/components/ui/GlassCard";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { SectionReveal } from "@/components/ui/SectionReveal";
-import { siteConfig } from "@/data/portfolio";
+import { motion } from "framer-motion";
+
+const scene = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.82, ease: "easeOut" },
+  },
+};
+
+const beat = {
+  hidden: { opacity: 0, y: 26, filter: "blur(6px)" },
+  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.72, ease: "easeOut" } },
+};
 
 export function AboutSection() {
   return (
-    <SectionReveal id="about" className="relative z-10 px-5 py-24 md:px-8 md:py-32">
-      <div className="mx-auto max-w-6xl">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-purple-300/90">
-          About
-        </p>
-        <SectionHeading>At a glance</SectionHeading>
-        <div className="mt-12 grid gap-10 md:grid-cols-[1fr_320px] md:items-start">
-          <GlassCard className="p-8 md:p-10">
-            <div className="space-y-6 text-base leading-relaxed text-zinc-300">
-              {siteConfig.about.split("\n\n").map((para, idx) => (
-                <p key={idx}>{para}</p>
-              ))}
-            </div>
-          </GlassCard>
-
-          {/* Image slot: wire up when siteConfig.aboutImage is set */}
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-purple-400/25 bg-gradient-to-br from-purple-800/25 to-[#1a1724] shadow-aura-sm">
-            {siteConfig.aboutImage ? (
-              <Image
-                src={siteConfig.aboutImage}
-                alt="Profile"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 320px"
-              />
-            ) : (
-              <div className="flex h-full flex-col items-center justify-center p-6 text-center">
-                <span className="text-4xl text-purple-500/40">◇</span>
-                <p className="mt-4 text-sm text-zinc-500">
-                  Placeholder for your photo.
-                  <br />
-                  Set <code className="text-purple-300/80">aboutImage</code> in{" "}
-                  <code className="text-purple-300/80">portfolio.ts</code>.
-                </p>
-              </div>
-            )}
-          </div>
+    <section id="about" className="relative px-5 py-20 md:px-8 md:py-28">
+      <motion.div
+        className="mx-auto grid max-w-6xl gap-8 rounded-3xl border border-purple-500/25 bg-black/45 p-8 md:grid-cols-12 md:items-center md:p-10"
+        variants={scene}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-20%" }}
+      >
+        <div className="md:col-span-7">
+          <motion.p variants={beat} className="text-sm uppercase tracking-[0.2em] text-purple-300/85">
+            About
+          </motion.p>
+          <motion.h2 variants={beat} transition={{ delay: 0.16 }} className="mt-3 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl">
+            Who I Am
+          </motion.h2>
+          <motion.p variants={beat} transition={{ delay: 0.28 }} className="mt-6 max-w-2xl font-light leading-[1.72] text-zinc-300">
+            I am a developer and engineer focused on building intelligent systems that connect
+            software with real-world applications. My work spans AI, simulation, and advanced
+            engineering concepts, with a focus on creating tools that evolve and adapt.
+          </motion.p>
         </div>
-      </div>
-    </SectionReveal>
+
+        <motion.div variants={beat} transition={{ delay: 0.36 }} className="md:col-span-5">
+          <div className="h-72 rounded-2xl border border-purple-400/30 bg-[radial-gradient(circle_at_25%_30%,rgba(122,0,255,0.45),rgba(0,0,0,0.15)_50%),linear-gradient(140deg,rgba(106,13,173,0.38),rgba(58,80,255,0.22),rgba(0,0,0,0.62))] shadow-[0_0_30px_rgba(122,0,255,0.2)]">
+            <div className="flex h-full items-end justify-start p-4">
+              <span className="rounded-full border border-white/20 bg-black/50 px-3 py-1 text-xs text-purple-100">
+                Placeholder Image
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </section>
   );
 }

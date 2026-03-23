@@ -1,48 +1,58 @@
 "use client";
 
 /**
- * Composes all on-page sections. This file is the "single page" body.
- * Tweak section order here; edit copy/data in src/data/portfolio.ts.
- *
- * Note: We use `src/views/` instead of `src/pages/` because Next.js reserves
- * `pages/` for the legacy Pages Router — see README "Project structure".
+ * This file is the page-level composition layer.
+ * Reorder sections here without touching each section's internal logic.
  */
 
 import { motion } from "framer-motion";
 import { AnimatedBackground } from "@/components/layout/AnimatedBackground";
-import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ContactSection } from "@/components/sections/ContactSection";
-import { FutureSection } from "@/components/sections/FutureSection";
+import { ExtendedSections } from "@/components/sections/ExtendedSections";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { NarrativeCloseSection } from "@/components/sections/NarrativeCloseSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { ResumeSection } from "@/components/sections/ResumeSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
-import type { GitHubRepo } from "@/lib/github";
-
-type HomePageProps = {
-  githubRepos: GitHubRepo[];
-};
-
-export function HomePage({ githubRepos }: HomePageProps) {
+export function HomePage() {
   return (
     <>
       <AnimatedBackground />
       <Navbar />
       <motion.main
-        initial={{ opacity: 0, y: 28, filter: "blur(14px)" }}
+        initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.9, ease: "easeInOut" }}
+        className="relative z-10 md:snap-y md:snap-proximity"
       >
-        <HeroSection />
-        <AboutSection />
-        <FutureSection />
-        <ProjectsSection githubRepos={githubRepos} />
-        <SkillsSection />
-        <ResumeSection />
-        <ContactSection />
-        <Footer />
+        <div className="md:snap-start">
+          <HeroSection />
+        </div>
+        <div className="md:snap-start">
+          <ProjectsSection />
+        </div>
+        <section className="px-5 pt-4 md:px-8">
+          <div className="mx-auto h-px w-full max-w-6xl bg-gradient-to-r from-transparent via-purple-500/35 to-transparent" />
+        </section>
+        <div className="md:snap-start">
+          <AboutSection />
+        </div>
+        <div className="md:snap-start">
+          <SkillsSection />
+        </div>
+        <section className="px-5 pt-4 md:px-8">
+          <div className="mx-auto h-px w-full max-w-6xl bg-gradient-to-r from-transparent via-purple-500/25 to-transparent" />
+        </section>
+        <div className="md:snap-start">
+          <ExtendedSections />
+        </div>
+        <div className="md:snap-start">
+          <NarrativeCloseSection />
+        </div>
+        <div className="md:snap-start">
+          <ContactSection />
+        </div>
       </motion.main>
     </>
   );
