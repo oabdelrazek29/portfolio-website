@@ -2,12 +2,17 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { siteConfig } from "@/data/portfolio";
 
 /**
- * Global footer:
- * concise status + navigation + social placeholders.
+ * Global footer: navigation + repos tab link (not bare profile landing).
  */
 export function SiteFooter() {
+  const reposUrl =
+    typeof siteConfig.githubUrl === "string" && siteConfig.githubUrl.includes("github.com")
+      ? siteConfig.githubUrl
+      : "https://github.com/oabdelrazek29?tab=repositories";
+
   return (
     <footer className="relative z-10 border-t border-white/[0.08] px-5 py-10 md:px-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
@@ -39,10 +44,21 @@ export function SiteFooter() {
           <Link href="/working-on" className="transition hover:text-purple-200">
             Working On
           </Link>
-          <a href="https://github.com/your-username" className="transition hover:text-purple-200">
+          <Link href="/arcadia-demo" className="transition hover:text-purple-200">
+            ARCADIA demo
+          </Link>
+          <a
+            href={reposUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition hover:text-purple-200"
+          >
             GitHub
           </a>
-          <a href="mailto:omar@example.com" className="transition hover:text-purple-200">
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="transition hover:text-purple-200"
+          >
             Email
           </a>
         </div>

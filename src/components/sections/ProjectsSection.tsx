@@ -120,7 +120,7 @@ export function ProjectsSection() {
                     onClick={(e) => e.stopPropagation()}
                     className="mt-4 block w-fit text-xs text-purple-300/80 underline-offset-4 transition hover:text-purple-200 hover:underline"
                   >
-                    Open GitHub
+                    Open repository
                   </a>
                 </div>
               </motion.button>

@@ -143,10 +143,23 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             ) : null}
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <GlowButton href={project.github} className="from-[#160525]/70 to-[#2a0d3c]/70">
-                View GitHub
+              <GlowButton
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="from-[#160525]/70 to-[#2a0d3c]/70"
+              >
+                Open repository
               </GlowButton>
-              {project.demo ? <GlowButton href={project.demo}>Live Demo</GlowButton> : null}
+              {project.demo ? (
+                project.demo.startsWith("http") ? (
+                  <GlowButton href={project.demo} target="_blank" rel="noopener noreferrer">
+                    Live demo
+                  </GlowButton>
+                ) : (
+                  <GlowButton href={project.demo}>Live demo</GlowButton>
+                )
+              ) : null}
             </div>
           </motion.article>
         </motion.div>

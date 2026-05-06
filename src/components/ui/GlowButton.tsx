@@ -6,11 +6,14 @@
  */
 
 import { motion, type HTMLMotionProps } from "framer-motion";
-import { type ReactNode } from "react";
+import { type AnchorHTMLAttributes, type ReactNode } from "react";
 
 type GlowButtonProps = {
   children: ReactNode;
   href?: string;
+  /** When `href` is set, forwarded to `<a>` (opens other sites safely with `noopener`). */
+  target?: AnchorHTMLAttributes<HTMLAnchorElement>["target"];
+  rel?: string;
   className?: string;
   /** Defaults to `button`; use `submit` inside forms. */
   type?: "button" | "submit" | "reset";
@@ -19,6 +22,8 @@ type GlowButtonProps = {
 export function GlowButton({
   children,
   href,
+  target,
+  rel,
   className = "",
   type = "button",
   onClick,
@@ -42,6 +47,8 @@ export function GlowButton({
     return (
       <motion.a
         href={href}
+        target={target}
+        rel={rel}
         className={sharedClass}
         whileHover={hoverFx}
         whileTap={{ scale: 0.98 }}

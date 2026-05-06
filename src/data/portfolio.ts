@@ -66,6 +66,7 @@ Simulations telemetry and disciplined architecture help me test ideas before the
   skillsBannerImage: "/section-skills.jpg",
 
   githubUsername: "oabdelrazek29",
+  /** Social and footer GitHub links: repos tab lists all repositories, not the profile readme view. */
   githubUrl: "https://github.com/oabdelrazek29?tab=repositories",
   linkedinUrl: "https://linkedin.com/in/yourusername",
   email: "hello@yourdomain.com",

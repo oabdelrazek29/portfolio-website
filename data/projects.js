@@ -1,8 +1,8 @@
 /**
  * Portfolio featured projects cards and modal bodies.
+ *
+ * `github` on each row must point at that project's repository URL.
  */
-
-const githubProfile = "https://github.com/oabdelrazek29";
 
 const arcadiaVision = [
   `ARCADIA is still in development, but at its core it is an attempt to study and build a modular intelligence and control architecture capable of understanding motion, environment, decision making, and machine interaction in a way that mirrors how complex real world systems operate. The project is heavily inspired by aerospace navigation, autonomous robotics, computational physics, systems engineering, artificial intelligence, and large scale simulation theory.`,
@@ -60,7 +60,7 @@ export const projects = [
       "Python based study of modeled WiFi propagation occupancy shadowing and absorption mapped in three dimensions without capturing live RF hardware.",
     description: `PHANTOM Passive Human Analysis via Network Transmission On Map examines how electromagnetic energy could flow reflect weaken and silhouette against occupants inside a modeled interior.\n\nThe approach keeps computation tied to Maxwell level intuition reflection absorption multipath yet uses practical kernels such as ray approximations or lighter numeric schemes so workstations can visualize fields without waiting overnight for full wave solvers unless you purposely scale there.\n\nThat loop observational physics encoded numerically predictive maps compared against expectations is aligned with credible scientific software discipline rather than decoration only.`,
     image: "/project-phantom.jpg",
-    github: githubProfile,
+    github: "https://github.com/oabdelrazek29/phantom-wfif",
     demo: "/lab",
     stack: ["Python", "Spatial modeling", "3D visualization", "Propagation kernels"],
     focus: [
@@ -76,7 +76,7 @@ export const projects = [
       "This Next.js portfolio as a reusable layout engine for sections motion tokens and routed pages.",
     description: `The site bundles typography motion primitives and routed pages so new writing ships without rewriting the shell.\n\nContent anchors live in typed data maps components stay dumb where possible fetching logic isolates GitHub summaries when enabled which mirrors how frontend teams cooperate with designers.\n\nIteration goal is restrained motion strong contrast legible rhythm and accessibility so flair never steals meaning.`,
     image: "/project-portfolio.jpg",
-    github: githubProfile,
+    github: "https://github.com/oabdelrazek29/portfolio-website",
     demo: "/",
     stack: ["Next.js", "Tailwind CSS", "Framer Motion"],
     focus: ["Section modular layout", "Consistent hover and focus cues", "Content driven featured projects modal"],

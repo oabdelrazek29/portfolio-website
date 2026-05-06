@@ -14,6 +14,7 @@ export function Footer() {
         <div className="flex gap-6">
           <a
             href={siteConfig.githubUrl}
+            title="All repositories on GitHub"
             target="_blank"
             rel="noopener noreferrer"
             className="transition hover:text-purple-200"
