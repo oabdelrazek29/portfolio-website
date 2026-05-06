@@ -36,8 +36,8 @@ export const projects = [
       "Development stage modular intelligence and control architecture tying motion sensing uncertainty estimation stability simulation and disciplined interfaces into one roadmap.",
     description: arcadiaVision,
     image: "/project-arcadia.jpg",
-    github: githubProfile,
-    demo: "",
+    github: "https://github.com/oabdelrazek29/ARCADIA",
+    demo: "/arcadia-demo",
     stack: [
       "Probabilistic state estimation roadmap",
       "Control and stability",

@@ -46,7 +46,7 @@ const sectionMeta = [
     eyebrow: "Lab",
     title: "Experimental Workspace",
     body: "A sandbox for rapid prototypes and system drafts. Useful for testing interaction patterns or technical concepts before production.",
-    bullets: ["ARCADIA telemetry stub notes", "PHANTOM WiFi scene", "Portfolio UI experiments"],
+    bullets: ["ARCADIA telemetry and live `/arcadia-demo`", "PHANTOM WiFi scene", "Portfolio UI experiments"],
     href: "/lab",
   },
 ];

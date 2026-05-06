@@ -19,8 +19,15 @@ const links = [
   { label: "Working On", href: "/#working-on" },
   { label: "Notes", href: "/#notes" },
   { label: "Lab", href: "/#lab" },
+  { label: "ARCADIA", href: "/arcadia-demo" },
   { label: "Contact", href: "/#contact" },
 ];
+
+function navLinkActive(pathname: string | null, activeSection: string, href: string) {
+  const p = pathname ?? "";
+  if (href.startsWith("/#")) return p === "/" && href === `/#${activeSection}`;
+  return p === href;
+}
 
 export function Navbar() {
   const { scrollY } = useScroll();
@@ -127,14 +134,14 @@ export function Navbar() {
                   href={l.href}
                   onClick={(e) => onNavigate(e, l.href)}
                   className={`relative transition ${
-                    pathname === "/" && l.href === `/#${activeSection}`
+                    navLinkActive(pathname, activeSection, l.href)
                       ? "text-purple-200"
                       : "text-zinc-300 hover:text-purple-200"
                   }`}
                 >
                   {l.label}
                 </Link>
-                {pathname === "/" && l.href === `/#${activeSection}` ? (
+                {navLinkActive(pathname, activeSection, l.href) ? (
                   <motion.span
                     layoutId="active-nav-underline"
                     className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent"
@@ -166,7 +173,7 @@ export function Navbar() {
             >
               <div className="flex flex-wrap gap-2">
                 {links.map((l) => {
-                  const active = pathname === "/" && l.href === `/#${activeSection}`;
+                  const active = navLinkActive(pathname, activeSection, l.href);
                   return (
                     <Link
                       key={l.href}

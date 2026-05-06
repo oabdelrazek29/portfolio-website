@@ -1,15 +1,18 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { AnimatedBackground } from "@/components/layout/AnimatedBackground";
 import { Navbar } from "@/components/layout/Navbar";
 
-const labItems: { title: string; body: string }[] = [
+const labItems: { title: string; body: string; href?: string; linkLabel?: string }[] = [
   {
-    title: "ARCADIA telemetry stub",
-    body: `A small Python program that appends timestamped CSV rows like a ground station log. It lives in the ARCADIA folder on disk, separate from this Next site.
+    title: "ARCADIA live demo and telemetry",
+    body: `The public demo page runs a canvas simulation of noisy position samples and an alpha beta estimate, matching the Python CSV generator in the ARCADIA repository.
 
-When you are learning, readable logs beat clever binaries. This prototype is reference material for habits I will reuse in bigger autonomy stacks.`,
+The older telemetry logger still appends timestamped CSV rows on your machine for ground station style habits.`,
+    href: "/arcadia-demo",
+    linkLabel: "Open ARCADIA demo",
   },
   {
     title: "PHANTOM WiFi scene",
@@ -68,6 +71,14 @@ export default function LabPage() {
               <p className="mt-2 text-sm font-light leading-7 text-zinc-300 whitespace-pre-line">
                 {item.body}
               </p>
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  className="mt-4 inline-flex rounded-xl border border-purple-400/45 bg-purple-950/30 px-4 py-2 text-sm text-purple-100 transition hover:border-purple-300/65 hover:text-white"
+                >
+                  {item.linkLabel ?? "Open"}
+                </Link>
+              ) : null}
             </motion.article>
           ))}
         </section>
