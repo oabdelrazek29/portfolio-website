@@ -12,7 +12,7 @@ const labItems: { title: string; body: string; href?: string; linkLabel?: string
 
 The older telemetry logger still appends timestamped CSV rows on your machine for ground station style habits.`,
     href: "/arcadia-demo",
-    linkLabel: "Open ARCADIA demo",
+    linkLabel: "Open browser preview",
   },
   {
     title: "PHANTOM WiFi scene",

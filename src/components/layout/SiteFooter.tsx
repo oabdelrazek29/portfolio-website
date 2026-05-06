@@ -45,7 +45,7 @@ export function SiteFooter() {
             Working On
           </Link>
           <Link href="/arcadia-demo" className="transition hover:text-purple-200">
-            ARCADIA demo
+            Arcadia preview
           </Link>
           <a
             href={reposUrl}

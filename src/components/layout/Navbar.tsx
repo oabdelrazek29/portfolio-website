@@ -19,7 +19,7 @@ const links = [
   { label: "Working On", href: "/#working-on" },
   { label: "Notes", href: "/#notes" },
   { label: "Lab", href: "/#lab" },
-  { label: "ARCADIA", href: "/arcadia-demo" },
+  { label: "Arcadia preview", href: "/arcadia-demo" },
   { label: "Contact", href: "/#contact" },
 ];
 
