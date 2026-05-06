@@ -16,8 +16,9 @@ type ProjectModalProps = {
     status: string;
     shortDescription: string;
     description: string;
+    image?: string;
     github: string;
-    demo: string;
+    demo?: string;
     stack?: string[];
     focus?: string[];
   } | null;
@@ -86,16 +87,33 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               ×
             </button>
 
-            <div className="h-48 rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_20%_20%,rgba(122,0,255,0.4),rgba(0,0,0,0.2)_45%),linear-gradient(140deg,rgba(106,13,173,0.45),rgba(58,80,255,0.25),rgba(0,0,0,0.7))]" />
+            <div
+              className="h-48 rounded-2xl border border-white/10 bg-cover bg-center"
+              style={
+                project.image
+                  ? {
+                      backgroundImage: [
+                        "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.08) 85%)",
+                        `url('${project.image}')`,
+                      ].join(", "),
+                    }
+                  : {
+                      backgroundImage:
+                        "radial-gradient(circle_at_20%_20%,rgba(122,0,255,0.4),rgba(0,0,0,0.2)_45%),linear-gradient(140deg,rgba(106,13,173,0.45),rgba(58,80,255,0.25),rgba(0,0,0,0.7))",
+                    }
+              }
+            />
 
             <p className="mt-6 text-xs uppercase tracking-[0.2em] text-purple-300/80">Project Detail</p>
             <h2 id="project-modal-title" className="mt-2 text-3xl font-medium text-white">
               {project.title}
             </h2>
             <p className="mt-2 text-sm text-purple-200/90">Status: {project.status}</p>
-            <p className="mt-4 text-base font-light leading-[1.75] text-zinc-300">
-              {project.description}
-            </p>
+            <div className="mt-4 space-y-4 text-base font-light leading-[1.75] text-zinc-300">
+              {project.description.split("\n\n").map((paragraph, paragraphIndex) => (
+                <p key={`paragraph-${paragraphIndex}`}>{paragraph.trim()}</p>
+              ))}
+            </div>
 
             {project.stack?.length ? (
               <div className="mt-6">
@@ -115,10 +133,10 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             {project.focus?.length ? (
               <div className="mt-6">
-                <p className="text-sm font-normal text-white">Current Focus</p>
-                <ul className="mt-3 space-y-2 text-sm font-light leading-7 text-zinc-300">
+                <p className="text-sm font-normal text-white">Current focus</p>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm font-light leading-7 text-zinc-300">
                   {project.focus.map((line) => (
-                    <li key={line}>- {line}</li>
+                    <li key={line}>{line}</li>
                   ))}
                 </ul>
               </div>
@@ -128,7 +146,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               <GlowButton href={project.github} className="from-[#160525]/70 to-[#2a0d3c]/70">
                 View GitHub
               </GlowButton>
-              <GlowButton href={project.demo}>Live Demo</GlowButton>
+              {project.demo ? <GlowButton href={project.demo}>Live Demo</GlowButton> : null}
             </div>
           </motion.article>
         </motion.div>

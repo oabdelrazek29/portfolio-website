@@ -4,11 +4,27 @@ import { motion } from "framer-motion";
 import { AnimatedBackground } from "@/components/layout/AnimatedBackground";
 import { Navbar } from "@/components/layout/Navbar";
 
-const placeholders = [
-  "Experiment Placeholder A",
-  "Experiment Placeholder B",
-  "UI Prototype Placeholder",
-  "System Design Draft Placeholder",
+const labItems: { title: string; body: string }[] = [
+  {
+    title: "ARCADIA telemetry stub",
+    body: `A small Python program that appends timestamped CSV rows like a ground station log. It lives in the ARCADIA folder on disk, separate from this Next site.
+
+When you are learning, readable logs beat clever binaries. This prototype is reference material for habits I will reuse in bigger autonomy stacks.`,
+  },
+  {
+    title: "PHANTOM WiFi scene",
+    body: `Interactive 3D view of modeled signal behavior in space. Useful for intuition before any claim about sensing in the real world.
+
+Public details will track the main PHANTOM writeup when the next milestone is ready.`,
+  },
+  {
+    title: "Portfolio UI slices",
+    body: `Motion, glass cards, and section flow on this site are also a lab. Small layout experiments land here first so the main homepage stays cohesive.`,
+  },
+  {
+    title: "Room for the next build",
+    body: `This slot is intentionally open. When a new prototype deserves a public note, it lands here with context and honest limits.`,
+  },
 ];
 
 export default function LabPage() {
@@ -39,18 +55,18 @@ export default function LabPage() {
         </section>
 
         <section className="mx-auto mt-10 grid max-w-5xl gap-4 md:grid-cols-2">
-          {placeholders.map((item, index) => (
+          {labItems.map((item, index) => (
             <motion.article
-              key={item}
+              key={item.title}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-20%" }}
               transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
               className="rounded-xl border border-purple-500/25 bg-black/45 p-5"
             >
-              <h2 className="text-lg font-medium text-white">{item}</h2>
-              <p className="mt-2 text-sm font-light leading-7 text-zinc-300">
-                Replace this block with a real prototype, system note, or implementation draft.
+              <h2 className="text-lg font-medium text-white">{item.title}</h2>
+              <p className="mt-2 text-sm font-light leading-7 text-zinc-300 whitespace-pre-line">
+                {item.body}
               </p>
             </motion.article>
           ))}

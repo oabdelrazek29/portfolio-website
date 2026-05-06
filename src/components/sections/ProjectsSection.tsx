@@ -18,7 +18,7 @@ type ProjectItem = {
   description: string;
   image: string;
   github: string;
-  demo: string;
+  demo?: string;
   stack?: string[];
   focus?: string[];
 };
@@ -78,14 +78,14 @@ export function ProjectsSection() {
                   <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                     style={{
-                      backgroundImage:
-                        "radial-gradient(circle at 30% 20%, rgba(122,0,255,0.35), rgba(0,0,0,0.15) 50%), linear-gradient(135deg, rgba(106,13,173,0.5), rgba(58,80,255,0.25), rgba(0,0,0,0.5))",
+                      backgroundImage: [
+                        "radial-gradient(circle at 30% 22%, rgba(122,0,255,0.38), rgba(0,0,0,0.2) 52%)",
+                        "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)",
+                        `url('${project.image}')`,
+                      ].join(", "),
                     }}
                   />
-                  <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="absolute bottom-4 left-4 rounded-full border border-white/20 bg-black/50 px-3 py-1 text-xs text-purple-100">
-                    Image Placeholder
-                  </div>
+                  <div className="absolute inset-0 bg-black/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
 
                 <div className="relative p-6 md:col-span-5 md:p-8">

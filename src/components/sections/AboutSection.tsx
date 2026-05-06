@@ -1,14 +1,19 @@
 "use client";
 
 /**
- * About section.
- * The text below is intentionally hard-coded per request for brand consistency.
+ * About panel: copy and art from `siteConfig` in `portfolio.ts`.
  */
 
 import { motion } from "framer-motion";
 import { SceneLine, SceneStagger } from "@/components/ui/SceneText";
+import { siteConfig } from "@/data/portfolio";
 
 export function AboutSection() {
+  const panelImage =
+    siteConfig.aboutImage && typeof siteConfig.aboutImage === "string"
+      ? siteConfig.aboutImage
+      : null;
+
   return (
     <section id="about" className="relative px-5 py-20 md:px-8 md:py-28">
       <motion.div
@@ -29,11 +34,11 @@ export function AboutSection() {
               </h2>
             </SceneLine>
             <SceneLine delay={0.16}>
-              <p className="mt-6 max-w-2xl font-light leading-[1.72] text-zinc-300">
-                I am a developer and engineer focused on building intelligent systems that connect
-                software with real-world applications. My work spans AI, simulation, and advanced
-                engineering concepts, with a focus on creating tools that evolve and adapt.
-              </p>
+              <div className="mt-6 max-w-2xl space-y-4 font-light leading-[1.72] text-zinc-300">
+                {siteConfig.about.split("\n\n").map((block, blockIndex) => (
+                  <p key={`about-${blockIndex}`}>{block.trim()}</p>
+                ))}
+              </div>
             </SceneLine>
           </SceneStagger>
         </div>
@@ -45,13 +50,24 @@ export function AboutSection() {
           transition={{ duration: 0.82, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="md:col-span-5"
         >
-          <div className="h-72 rounded-2xl border border-purple-400/30 bg-[radial-gradient(circle_at_25%_30%,rgba(122,0,255,0.45),rgba(0,0,0,0.15)_50%),linear-gradient(140deg,rgba(106,13,173,0.38),rgba(58,80,255,0.22),rgba(0,0,0,0.62))] shadow-[0_0_30px_rgba(122,0,255,0.2)]">
-            <div className="flex h-full items-end justify-start p-4">
-              <span className="rounded-full border border-white/20 bg-black/50 px-3 py-1 text-xs text-purple-100">
-                Placeholder Image
-              </span>
-            </div>
-          </div>
+          <div
+            className="h-72 overflow-hidden rounded-2xl border border-purple-400/30 bg-zinc-950 shadow-[0_0_30px_rgba(122,0,255,0.2)]"
+            style={
+              panelImage
+                ? {
+                    backgroundImage: [
+                      "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.08) 60%)",
+                      `url('${panelImage}')`,
+                    ].join(", "),
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }
+                : {
+                    backgroundImage:
+                      "radial-gradient(circle at 25% 30%, rgba(122,0,255,0.45), rgba(0,0,0,0.15) 50%), linear-gradient(140deg, rgba(106,13,173,0.38), rgba(58,80,255,0.22), rgba(0,0,0,0.62))",
+                  }
+            }
+          />
         </motion.div>
       </motion.div>
     </section>

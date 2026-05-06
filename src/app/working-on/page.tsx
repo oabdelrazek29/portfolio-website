@@ -5,11 +5,10 @@ import { AnimatedBackground } from "@/components/layout/AnimatedBackground";
 import { Navbar } from "@/components/layout/Navbar";
 
 const activeItems = [
-  "Control loop tuning experiments",
-  "Trajectory visualization cleanup",
-  "Project documentation pass",
-  "Interface consistency checks",
-  "Navigation and route expansion",
+  "ARCADIA, lesson track plus first telemetry logger prototype on my machine",
+  "Portfolio site copy and upcoming projects, PHANTOM and ARCADIA front and center",
+  "PHANTOM simulation polish, visualization and documentation passes",
+  "Lab and Working On pages kept honest as real experiments replace placeholders",
 ];
 
 export default function WorkingOnPage() {

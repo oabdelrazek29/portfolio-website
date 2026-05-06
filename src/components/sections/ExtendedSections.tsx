@@ -26,7 +26,11 @@ const sectionMeta = [
     eyebrow: "Working On",
     title: "Current Development Log",
     body: "A lightweight area for active tasks, experiments, and implementation notes. Keep it current to show momentum and direction.",
-    bullets: ["Control loop tuning experiments", "Trajectory visualization cleanup", "Documentation pass"],
+    bullets: [
+      "ARCADIA lesson track and telemetry prototype",
+      "Site copy aligned with PHANTOM and ARCADIA",
+      "PHANTOM polish and docs",
+    ],
     href: "/working-on",
   },
   {
@@ -42,7 +46,7 @@ const sectionMeta = [
     eyebrow: "Lab",
     title: "Experimental Workspace",
     body: "A sandbox for rapid prototypes and system drafts. Useful for testing interaction patterns or technical concepts before production.",
-    bullets: ["Experiment Placeholder A", "UI Prototype Placeholder", "System Design Draft Placeholder"],
+    bullets: ["ARCADIA telemetry stub notes", "PHANTOM WiFi scene", "Portfolio UI experiments"],
     href: "/lab",
   },
 ];
