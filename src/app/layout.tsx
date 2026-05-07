@@ -17,10 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="font-sans antialiased">
-        <PageTransition>
-          {children}
-          <SiteFooter />
-        </PageTransition>
+        {/* Footer stays mounted on route changes so nav never "drops" beneath a fading shell. */}
+        <PageTransition>{children}</PageTransition>
+        <SiteFooter />
       </body>
     </html>
   );

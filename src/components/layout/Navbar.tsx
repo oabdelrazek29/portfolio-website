@@ -20,6 +20,7 @@ const links = [
   { label: "Notes", href: "/#notes" },
   { label: "Lab", href: "/#lab" },
   { label: "Arcadia preview", href: "/arcadia-demo" },
+  { label: "ARCADIA OS", href: "/arcadia-os" },
   { label: "Contact", href: "/#contact" },
 ];
 
