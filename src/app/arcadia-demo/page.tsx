@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { AnimatedBackground } from "@/components/layout/AnimatedBackground";
 import { Navbar } from "@/components/layout/Navbar";
-import { ArcadiaDemo } from "@/components/arcadia/ArcadiaDemo";
+import { ArcadiaTerminalDemo } from "@/components/arcadia/ArcadiaTerminalDemo";
 
 const ARCADIA_REPO = "https://github.com/oabdelrazek29/ARCADIA";
 
@@ -29,19 +29,23 @@ export default function ArcadiaDemoPage() {
             transition={{ duration: 0.78, delay: 0.08 }}
             className="mt-3 rounded-2xl border border-purple-400/35 bg-purple-950/25 p-5 text-[15px] leading-relaxed text-zinc-200 md:text-[16px]"
           >
-            <p className="font-medium text-purple-100">Important distinction</p>
+            <p className="font-medium text-purple-100">Phase 1 — terminal OS simulator</p>
             <p className="mt-2 text-zinc-300">
-              This webpage is{" "}
-              <strong className="font-medium text-purple-100">not</strong> where ARCADIA source code lives. This canvas
-              is only JavaScript animation so a visitor can watch one noisy tracking lesson without installing Python.
-              Real code is in your ARCADIA GitHub repo under the Python package{" "}
-              <code className="mx-1 rounded border border-white/10 bg-black/40 px-1.5 py-0.5 text-purple-100">arcadia</code>
-              ,
-              usual command after editable install reads{" "}
+              This page runs a <strong className="font-medium text-purple-100">browser preview</strong> of the same
+              boot sequence, dashboard, and <code className="text-purple-100">ARC&gt;</code> command loop as the Python
+              package. Full source and comments live in the ARCADIA repo under{" "}
               <code className="rounded border border-white/10 bg-black/40 px-1.5 py-0.5 text-purple-100">
-                python -m arcadia sim ...
+                arcadia/terminal_os/
               </code>
-              exporting the same CSV style math offline on your laptop.
+              . After{" "}
+              <code className="rounded border border-white/10 bg-black/40 px-1.5 py-0.5 text-purple-100">
+                pip install -e .
+              </code>{" "}
+              run{" "}
+              <code className="rounded border border-white/10 bg-black/40 px-1.5 py-0.5 text-purple-100">
+                python -m arcadia shell
+              </code>{" "}
+              in your terminal for the real REPL.
             </p>
           </motion.div>
           <motion.h1
@@ -50,7 +54,7 @@ export default function ArcadiaDemoPage() {
             transition={{ duration: 0.78, delay: 0.12 }}
             className="mt-8 text-4xl font-medium tracking-[-0.02em] text-white md:text-5xl"
           >
-            Lesson preview noisy track plus alpha beta filter animation
+            Live boot, dashboard, and shell (preview)
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -58,9 +62,12 @@ export default function ArcadiaDemoPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mt-5 max-w-3xl font-light leading-[1.75] text-zinc-400 md:text-[17px]"
           >
-            Gray path scripted motion, red fuzzy dots pretend broken sensor readings, cyan smooth curve pretends fused
-            estimate. Slider noise and gains mimic what you tweak in Lesson 03. Pause export tail CSV from your session
-            for notes only.
+            Modules load in order: CORE → MEMORY → PLANNER → INTERFACE. Try{" "}
+            <span className="text-zinc-300">status</span>, <span className="text-zinc-300">log</span>,{" "}
+            <span className="text-zinc-300">help</span>, <span className="text-zinc-300">exit</span>. For the older
+            planar alpha–beta canvas lesson, see the component{" "}
+            <code className="rounded border border-white/10 bg-black/30 px-1 text-zinc-400">ArcadiaPlanarLesson</code> in
+            the repo if you wire it elsewhere.
           </motion.p>
 
           <motion.div
@@ -95,7 +102,7 @@ export default function ArcadiaDemoPage() {
             transition={{ delay: 0.28, duration: 0.85 }}
             className="mt-12"
           >
-            <ArcadiaDemo />
+            <ArcadiaTerminalDemo />
           </motion.div>
         </section>
       </main>
