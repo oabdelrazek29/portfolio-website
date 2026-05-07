@@ -7,8 +7,10 @@
 import { motion } from "framer-motion";
 import { SceneLine, SceneStagger } from "@/components/ui/SceneText";
 import { siteConfig } from "@/data/portfolio";
+import { useLightMotion } from "@/hooks/useLightMotion";
 
 export function AboutSection() {
+  const light = useLightMotion();
   const panelImage =
     siteConfig.aboutImage && typeof siteConfig.aboutImage === "string"
       ? siteConfig.aboutImage
@@ -44,10 +46,14 @@ export function AboutSection() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={
+            light ? { opacity: 0, y: 16 } : { opacity: 0, y: 24, filter: "blur(6px)" }
+          }
+          whileInView={
+            light ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, filter: "blur(0px)" }
+          }
           viewport={{ once: true, margin: "-20%" }}
-          transition={{ duration: 0.82, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: light ? 0.5 : 0.82, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="md:col-span-5"
         >
           <div

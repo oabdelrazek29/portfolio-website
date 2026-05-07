@@ -112,7 +112,7 @@ export function Navbar() {
         style={{ scaleX: sectionProgress }}
       />
       <motion.header
-        className="fixed left-0 right-0 top-0 z-50 border-b border-white/[0.08] backdrop-blur-xl"
+        className="fixed left-0 right-0 top-0 z-50 border-b border-white/[0.08] backdrop-blur-md md:backdrop-blur-xl"
         style={{ backgroundColor: backdrop }}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
@@ -169,7 +169,7 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.24, ease: "easeOut" }}
-              className="border-t border-white/10 bg-black/85 px-4 pb-4 pt-3 backdrop-blur-xl md:hidden"
+              className="border-t border-white/10 bg-black/85 px-4 pb-4 pt-3 backdrop-blur-md md:hidden"
             >
               <div className="flex flex-wrap gap-2">
                 {links.map((l) => {

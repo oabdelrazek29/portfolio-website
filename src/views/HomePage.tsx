@@ -8,6 +8,7 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { AnimatedBackground } from "@/components/layout/AnimatedBackground";
+import { useLightMotion } from "@/hooks/useLightMotion";
 import { Navbar } from "@/components/layout/Navbar";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -17,6 +18,8 @@ import { NarrativeCloseSection } from "@/components/sections/NarrativeCloseSecti
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 export function HomePage() {
+  const light = useLightMotion();
+
   useEffect(() => {
     document.documentElement.classList.add("scene-scroll-active");
     document.body.classList.add("scene-scroll-active");
@@ -31,9 +34,9 @@ export function HomePage() {
       <AnimatedBackground />
       <Navbar />
       <motion.main
-        initial={{ opacity: 0, filter: "blur(4px)" }}
-        animate={{ opacity: 1, filter: "blur(0px)" }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        initial={light ? { opacity: 0 } : { opacity: 0, filter: "blur(4px)" }}
+        animate={light ? { opacity: 1 } : { opacity: 1, filter: "blur(0px)" }}
+        transition={{ duration: light ? 0.45 : 0.9, ease: [0.22, 1, 0.36, 1] }}
         className="scene-scroll relative z-10 transform-gpu"
       >
         <div className="scene-step">

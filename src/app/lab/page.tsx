@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { AnimatedBackground } from "@/components/layout/AnimatedBackground";
 import { Navbar } from "@/components/layout/Navbar";
+import { useLightMotion } from "@/hooks/useLightMotion";
 
 const labItems: { title: string; body: string; href?: string; linkLabel?: string }[] = [
   {
@@ -31,6 +32,8 @@ Public details will track the main PHANTOM writeup when the next milestone is re
 ];
 
 export default function LabPage() {
+  const light = useLightMotion();
+
   return (
     <>
       <AnimatedBackground />
@@ -47,10 +50,14 @@ export default function LabPage() {
             Lab
           </motion.p>
           <motion.h1
-            initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={
+              light ? { opacity: 0, y: 24 } : { opacity: 0, y: 40, filter: "blur(6px)" }
+            }
+            whileInView={
+              light ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, filter: "blur(0px)" }
+            }
             viewport={{ once: true, margin: "-20%" }}
-            transition={{ duration: 0.82, delay: 0.16, ease: "easeOut" }}
+            transition={{ duration: light ? 0.45 : 0.82, delay: 0.16, ease: "easeOut" }}
             className="mt-3 text-5xl font-medium text-white"
           >
             Experimental Workspace

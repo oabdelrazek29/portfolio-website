@@ -2,12 +2,14 @@
 
 /**
  * Hero with full width background art and copy from `siteConfig` in `portfolio.ts`.
+ * Phones skip blur filters and parallax (expensive on mobile GPU).
  */
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { useCallback } from "react";
 import { siteConfig } from "@/data/portfolio";
+import { useLightMotion } from "@/hooks/useLightMotion";
 
 const container = {
   hidden: { opacity: 0 },
@@ -17,7 +19,8 @@ const container = {
   },
 };
 
-const item = {
+/** Full variant uses blur during reveal (fine on desktop only). */
+const itemHeavy = {
   hidden: { opacity: 0, y: 40, filter: "blur(6px)" },
   show: {
     opacity: 1,
@@ -27,13 +30,23 @@ const item = {
   },
 };
 
+const itemLite = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 const heroName = siteConfig.name;
 const titleChars = heroName.split("");
 const titleSequence = {
   hidden: {},
   show: { transition: { staggerChildren: 0.022, delayChildren: 0.1 } },
 };
-const titleChar = {
+
+const titleCharHeavy = {
   hidden: { opacity: 0, y: 9, filter: "blur(6px)" },
   show: {
     opacity: 1,
@@ -43,7 +56,18 @@ const titleChar = {
   },
 };
 
+const titleCharLite = {
+  hidden: { opacity: 0, y: 6 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 export function HeroSection() {
+  const light = useLightMotion();
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const smoothX = useSpring(mouseX, { stiffness: 26, damping: 20 });
@@ -54,14 +78,18 @@ export function HeroSection() {
 
   const onMouseMove = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
+      if (light) return;
       const bounds = e.currentTarget.getBoundingClientRect();
       const x = (e.clientX - bounds.left) / bounds.width;
       const y = (e.clientY - bounds.top) / bounds.height;
       mouseX.set(x);
       mouseY.set(y);
     },
-    [mouseX, mouseY],
+    [light, mouseX, mouseY],
   );
+
+  const item = light ? itemLite : itemHeavy;
+  const titleChar = light ? titleCharLite : titleCharHeavy;
 
   const bgUrl = siteConfig.heroBackgroundImage;
 
@@ -90,13 +118,17 @@ export function HeroSection() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-20%" }}
-        style={{ x: parallaxX, y: parallaxY }}
+        style={light ? undefined : { x: parallaxX, y: parallaxY }}
       >
         <motion.div className="relative max-w-5xl" variants={item}>
-          <motion.span
-            className="pointer-events-none absolute -inset-3 rounded-2xl bg-[radial-gradient(circle_at_center,rgba(122,0,255,0.28),transparent_72%)] blur-2xl"
-            style={{ opacity: glowOpacity }}
-          />
+          {!light ? (
+            <motion.span
+              className="pointer-events-none absolute -inset-3 rounded-2xl bg-[radial-gradient(circle_at_center,rgba(122,0,255,0.28),transparent_72%)] blur-2xl"
+              style={{ opacity: glowOpacity }}
+            />
+          ) : (
+            <span className="pointer-events-none absolute -inset-2 rounded-2xl bg-[radial-gradient(circle_at_center,rgba(122,0,255,0.2),transparent_72%)] blur-md opacity-40" />
+          )}
           <motion.h1
             variants={titleSequence}
             className="relative font-sans text-4xl font-semibold leading-[1.14] tracking-[-0.015em] text-white drop-shadow-lg transition-colors duration-500 hover:text-purple-100 md:text-6xl"

@@ -9,8 +9,11 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { futureAmbitions } from "@/data/portfolio";
+import { useLightMotion } from "@/hooks/useLightMotion";
 
 export function FutureSection() {
+  const light = useLightMotion();
+
   return (
     <SectionReveal id="future" className="relative z-10 px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
@@ -27,17 +30,33 @@ export function FutureSection() {
             <motion.div
               key={`${card.title}-${i}`}
               className={card.wide ? "md:col-span-2" : ""}
-              initial={{ opacity: 0, y: 36, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={
+                light
+                  ? { opacity: 0, y: 20 }
+                  : { opacity: 0, y: 36, filter: "blur(10px)" }
+              }
+              whileInView={
+                light
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 1, y: 0, filter: "blur(0px)" }
+              }
               viewport={{ once: true, margin: "-8%" }}
-              transition={{ delay: i * 0.1, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-              style={{ transformPerspective: 1000 }}
-              whileHover={{
-                y: -6,
-                rotateX: 4,
-                rotateY: i % 2 === 0 ? 2 : -2,
-                transition: { type: "spring", stiffness: 320, damping: 24 },
+              transition={{
+                delay: i * 0.1,
+                duration: light ? 0.5 : 0.75,
+                ease: [0.22, 1, 0.36, 1],
               }}
+              style={light ? undefined : { transformPerspective: 1000 }}
+              whileHover={
+                light
+                  ? undefined
+                  : {
+                      y: -6,
+                      rotateX: 4,
+                      rotateY: i % 2 === 0 ? 2 : -2,
+                      transition: { type: "spring", stiffness: 320, damping: 24 },
+                    }
+              }
             >
               <GlassCard
                 className={`h-full p-6 md:p-8 ${

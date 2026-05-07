@@ -7,8 +7,10 @@
 import { motion } from "framer-motion";
 import { SceneLine, SceneStagger } from "@/components/ui/SceneText";
 import { siteConfig, skills } from "@/data/portfolio";
+import { useLightMotion } from "@/hooks/useLightMotion";
 
 export function SkillsSection() {
+  const light = useLightMotion();
   const banner =
     siteConfig.skillsBannerImage && typeof siteConfig.skillsBannerImage === "string"
       ? siteConfig.skillsBannerImage
@@ -51,7 +53,7 @@ export function SkillsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20%" }}
                 transition={{ duration: 0.86, delay: index * 0.1 + 0.2, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -3, scale: 1.03 }}
+                whileHover={light ? undefined : { y: -3, scale: 1.03 }}
                 className="rounded-full border border-purple-400/35 bg-[#150b21]/80 px-4 py-2 text-sm font-normal text-purple-100 shadow-[0_0_20px_rgba(122,0,255,0.18)]"
               >
                 {skill.name}
@@ -62,10 +64,14 @@ export function SkillsSection() {
 
         {banner ? (
           <motion.div
-            initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={
+              light ? { opacity: 0, y: 16 } : { opacity: 0, y: 24, filter: "blur(6px)" }
+            }
+            whileInView={
+              light ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, filter: "blur(0px)" }
+            }
             viewport={{ once: true, margin: "-20%" }}
-            transition={{ duration: 0.88, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: light ? 0.5 : 0.88, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="md:col-span-5"
           >
             <div
