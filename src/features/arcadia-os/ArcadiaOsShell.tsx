@@ -10,18 +10,27 @@
 
 import { Navbar } from "@/components/layout/Navbar";
 import { AnimatedBackground } from "@/components/layout/AnimatedBackground";
+import { summarizeGstEvents } from "./science/gstInterpret";
+import { summarizeNeoBuckets } from "./science/neoInterpret";
+import {
+  ORBIT_SCENARIO_A_EARTH_MOON,
+  ORBIT_SCENARIO_B_LEO,
+  ORBIT_SCENARIO_C_FLYBY,
+} from "./science/orbitScenarios";
 import { TeachRibbon } from "./teach";
 import { ArcadiaOsErrorBoundary } from "./ArcadiaOsErrorBoundary";
 import { useArcadiaOs } from "./state/ArcadiaOsProvider";
 import type { ArcadiaView } from "./types";
 
 const NAV: { key: ArcadiaView; label: string; hint: string }[] = [
-  { key: "dashboard", label: "Dashboard", hint: "Global snapshot + freshness stamps" },
-  { key: "nasa", label: "NASA Data", hint: "APOD, NEO window, rover imagery via cached API" },
-  { key: "system", label: "System Stats", hint: "Node-reported diagnostics (polling)" },
-  { key: "logs", label: "Logs", hint: "Unified event ledger" },
-  { key: "eidolon", label: "EIDOLON Brain", hint: "Deterministic heuristic agent reactions" },
-  { key: "learning", label: "Learning Mode", hint: "How this architecture maps to production" },
+  { key: "dashboard", label: "Live snapshot", hint: "Bundle freshness + host slice" },
+  { key: "nasa", label: "NASA raw feed", hint: "APOD, NEO window, rover frames, DONKI GST (7d)" },
+  { key: "science", label: "Science board", hint: "Calm interpretation of catalogue JSON, not sensationalism" },
+  { key: "simulations", label: "Orbit vignettes", hint: "Text-only translunar / LEO / flyby timelines" },
+  { key: "system", label: "System telemetry", hint: "Node diagnostics from API route (polling)" },
+  { key: "logs", label: "Observation log", hint: `[SPACE]/[SCIENCE]/[SIM]/… tags` },
+  { key: "eidolon", label: "Heuristic alerts", hint: "Operational rule reactions (explicitly not personality AI)" },
+  { key: "learning", label: "Architecture primer", hint: "How SPA dashboards stay stable vs full reload sites" },
 ];
 
 function fmt(ms?: number) {
@@ -46,7 +55,7 @@ export function ArcadiaOsShell() {
         <div className="mx-auto flex max-w-[1400px] flex-col gap-6 lg:flex-row">
           {/* Sidebar */}
           <aside className="w-full shrink-0 space-y-3 lg:w-60">
-            <p className="text-xs uppercase tracking-[0.26em] text-purple-300/90">Arcadia OS</p>
+            <p className="text-xs uppercase tracking-[0.26em] text-purple-300/90">Observation desk</p>
             <nav className="flex flex-row flex-wrap gap-2 lg:flex-col" aria-label="ARCADIA views">
               {NAV.map((item) => {
                 const active = state.active_module === item.key;
@@ -102,10 +111,12 @@ export function ArcadiaOsShell() {
           <main className="min-h-[480px] flex-1 rounded-3xl border border-purple-500/25 bg-black/45 p-5 shadow-inner md:p-8">
             <header className="mb-8 flex flex-col gap-4 border-b border-white/10 pb-6 md:flex-row md:items-start md:justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-purple-300/90">Mission control preview</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-purple-300/90">
+                  ARCADIA Space Observation System
+                </p>
                 <div className="mt-3 flex flex-wrap items-center gap-3">
                   <h1 className="font-display text-3xl tracking-tight text-white md:text-4xl">
-                    ARCADIA · EIDOLON
+                    Live space intelligence workspace
                   </h1>
                   <span
                     className={`rounded-full border px-3 py-1 text-xs uppercase tracking-[0.2em] ${
@@ -120,13 +131,15 @@ export function ArcadiaOsShell() {
                   </span>
                 </div>
                 <p className="mt-2 max-w-3xl text-sm text-zinc-400">
-                  Live aggregates from NASA endpoints with server-side TTL cache + host telemetry from Node
-                  diagnostics. Async failures surface as degraded health but never intentionally blank this panel.
+                  Public NASA/DONKI JSON feeds flow through TTL-cached Route Handlers, get interpreted calmly in the
+                  Science board, and pair with deterministic text orbit vignettes — educational instrumentation, not
+                  fiction.&nbsp; SPA buttons below avoid full navigations so state stays warm while data refreshes on
+                  intervals.
                 </p>
               </div>
               {state.ui.eidolon_insight ? (
                 <div className="rounded-2xl border border-cyan-400/35 bg-cyan-950/30 px-4 py-3 text-sm text-cyan-100 md:max-w-sm">
-                  <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-200/85">Eidolon cue</p>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-200/85">Heuristic alert</p>
                   <p className="mt-2 leading-relaxed text-cyan-50">{state.ui.eidolon_insight}</p>
                 </div>
               ) : null}
@@ -149,6 +162,10 @@ function Panels() {
       return <Dashboard />;
     case "nasa":
       return <NasaPanel />;
+    case "science":
+      return <SciencePanel />;
+    case "simulations":
+      return <SimulationsPanel />;
     case "system":
       return (
         <div>
@@ -200,6 +217,10 @@ function Dashboard() {
             <div className="flex justify-between gap-4">
               <dt>Rover thumbnails</dt>
               <dd className="text-right">{state.nasa_cache.marsPhotos?.length ?? 0}</dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt>DONKI GST rows (7d)</dt>
+              <dd className="text-right">{state.nasa_cache.donkiGst?.events?.length ?? "—"}</dd>
             </div>
           </dl>
           <button
@@ -348,6 +369,118 @@ function NasaPanel() {
           })}
         </div>
       </section>
+
+      <section>
+        <h2 className="text-xl text-white">Space weather — geomagnetic storms (DONKI GST)</h2>
+        <p className="text-sm text-zinc-400">
+          {state.nasa_cache.donkiGst?.events?.length ?? 0} events in cached window · updated{" "}
+          {fmt(state.nasa_cache.donkiGst?.cache?.fetched_at_ms)} · cache hit{" "}
+          {String(state.nasa_cache.donkiGst?.cache?.hit ?? "—")}
+        </p>
+        <ul className="mt-4 space-y-3 text-sm text-zinc-300">
+          {(state.nasa_cache.donkiGst?.events ?? []).slice(0, 6).map((ev, i) => {
+            const id = ev.gstID != null ? String(ev.gstID) : `row-${i}`;
+            const start = ev.startTime != null ? String(ev.startTime) : "—";
+            return (
+              <li key={id} className="rounded-xl border border-white/10 bg-black/35 px-4 py-3">
+                <p className="font-mono text-xs text-purple-200/90">{id}</p>
+                <p className="mt-1 text-xs text-zinc-500">Start {start}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    </div>
+  );
+}
+
+function SciencePanel() {
+  const { state } = useArcadiaOs();
+  const neoBuckets = (state.nasa_cache.neo?.buckets ?? {}) as Record<string, unknown[]>;
+  const neoLines = summarizeNeoBuckets(neoBuckets);
+  const gstLines = summarizeGstEvents(state.nasa_cache.donkiGst?.events ?? []);
+
+  return (
+    <div className="space-y-10">
+      <TeachRibbon state={state}>
+        This panel turns catalogue JSON into distance scale and storm context: same numbers as the raw feed, with
+        explicit units and conservative language (PHA is a monitoring taxonomy, not a headline).
+      </TeachRibbon>
+
+      <section className="rounded-2xl border border-white/10 bg-black/40 p-6">
+        <h2 className="text-lg text-white">Near-Earth object window</h2>
+        <p className="mt-2 text-xs text-zinc-500">
+          NEO feed updated {fmt(state.nasa_cache.neo?.cache?.fetched_at_ms)} · elements{" "}
+          {state.nasa_cache.neo?.element_count ?? "—"}
+        </p>
+        <ul className="mt-6 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
+          {neoLines.map((line, idx) => (
+            <li key={`neo-${idx}`}>{line}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="rounded-2xl border border-white/10 bg-black/40 p-6">
+        <h2 className="text-lg text-white">Geomagnetic environment (GST)</h2>
+        <p className="mt-2 text-xs text-zinc-500">
+          DONKI cache {fmt(state.nasa_cache.donkiGst?.cache?.fetched_at_ms)} · hit{" "}
+          {String(state.nasa_cache.donkiGst?.cache?.hit ?? "—")}
+        </p>
+        <ul className="mt-6 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
+          {gstLines.map((line, idx) => (
+            <li key={`gst-${idx}`}>{line}</li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
+}
+
+function SimulationsPanel() {
+  const { state, dispatch } = useArcadiaOs();
+
+  const scenarios: { key: string; title: string; lines: readonly string[] }[] = [
+    { key: "a", title: "A · Conceptual Earth → Moon transfer", lines: ORBIT_SCENARIO_A_EARTH_MOON },
+    { key: "b", title: "B · LEO stability primer", lines: ORBIT_SCENARIO_B_LEO },
+    { key: "c", title: "C · Asteroid flyby geometry", lines: ORBIT_SCENARIO_C_FLYBY },
+  ];
+
+  function logScenarioLoaded(title: string, lineCount: number) {
+    dispatch({
+      type: "LOG_APPEND",
+      entries: [
+        {
+          level: "SIM",
+          scope: "ORBIT",
+          message: `[SIM] scenario loaded: ${title} (${lineCount} lines, text-only vignette)`,
+        },
+      ],
+    });
+  }
+
+  return (
+    <div className="space-y-8">
+      <TeachRibbon state={state}>
+        These are step-based explainers, not numerical integrators: they teach free-fall orbits and maneuver
+        vocabulary the same way mission-control briefings use timelines before opening a propagator.
+      </TeachRibbon>
+      {scenarios.map((s) => (
+        <article key={s.key} className="rounded-2xl border border-cyan-500/25 bg-[#061014]/80 p-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-lg text-cyan-50">{s.title}</h2>
+            <button
+              type="button"
+              className="rounded-lg border border-cyan-400/40 px-3 py-1.5 text-xs uppercase tracking-[0.2em] text-cyan-100 hover:border-cyan-300/60"
+              onClick={() => logScenarioLoaded(s.title, s.lines.filter((x) => x.trim().length > 0).length)}
+            >
+              Log load
+            </button>
+          </div>
+          <pre className="mt-4 whitespace-pre-wrap font-mono text-[13px] leading-relaxed text-zinc-300">
+            {s.lines.join("\n")}
+          </pre>
+        </article>
+      ))}
     </div>
   );
 }
@@ -359,8 +492,9 @@ function LogsPanel() {
   return (
     <div>
       <TeachRibbon state={state}>
-        Logs interleave scopes like production tracing: `[EVENT]` for human intent, `[STATE]` for datastore
-        changes, `[AGENT]` for EIDOLON heuristics, `[SYSTEM]` for host metrics.
+        Logs interleave scopes like production tracing: `[EVENT]` intent, `[STATE]` datastore changes, `[SPACE]`
+        feed ingestion, `[SCIENCE]` interpretation hooks, `[SIM]` vignette loads, `[AGENT]` EIDOLON heuristics,
+        `[SYSTEM]` host metrics.
       </TeachRibbon>
       <pre className="max-h-[520px] overflow-auto rounded-2xl border border-white/10 bg-black/60 p-4 font-mono text-[11px] leading-relaxed text-zinc-300">
         {tail.map((l, idx) => (
@@ -420,8 +554,8 @@ function LearningPanel() {
       body: `Server routes memoize upstream JSON for TTL windows. Operational lesson: dashboards never scrape primary APIs synchronously per click.`,
     },
     {
-      title: "EIDOLON philosophy",
-      body: `Rule reactions provide transparent audit trails. Agents stay accountable when every conclusion maps to deterministic predicates you can tweak.`,
+      title: "Interpretation vs raw JSON",
+      body: `Catalogue APIs ship structured blobs for machines first. A science board layer adds units, distance scale, and operational context so humans do not misread PHA tags or Kp indices as entertainment headlines.`,
     },
   ];
 

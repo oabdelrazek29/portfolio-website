@@ -74,19 +74,22 @@ export function ArcadiaOsProvider({ children }: { children: React.ReactNode }) {
   const refreshNasa = useCallback(async () => {
     dispatch({ type: "UI_REFRESH", slice: "nasaRefreshing", value: true });
     try {
-      const [apodRes, neoRes, marsRes] = await Promise.all([
+      const [apodRes, neoRes, marsRes, donkiRes] = await Promise.all([
         fetch("/api/arcadia/nasa/apod"),
         fetch("/api/arcadia/nasa/neo"),
         fetch("/api/arcadia/nasa/mars"),
+        fetch("/api/arcadia/nasa/donki"),
       ]);
       const apodBody = await apodRes.json();
       const neoBody = await neoRes.json();
       const marsBody = await marsRes.json();
+      const donkiBody = await donkiRes.json();
       const parts: string[] = [];
       if (!apodRes.ok || apodBody.error) parts.push(`APOD:${apodBody.error ?? apodRes.status}`);
       if (!neoRes.ok || neoBody.error) parts.push(`NEO:${neoBody.error ?? neoRes.status}`);
       if (!marsRes.ok || marsBody.error) parts.push(`MARS:${marsBody.error ?? marsRes.status}`);
-      if (parts.length === 3) {
+      if (!donkiRes.ok || donkiBody.error) parts.push(`DONKI:${donkiBody.error ?? donkiRes.status}`);
+      if (parts.length === 4) {
         dispatch({ type: "NASA_ERROR", message: parts.join(" · ") });
         return;
       }
@@ -103,6 +106,10 @@ export function ArcadiaOsProvider({ children }: { children: React.ReactNode }) {
             : undefined,
           marsPhotos:
             marsRes.ok && !marsBody.error && Array.isArray(marsBody.photos) ? marsBody.photos : undefined,
+          donkiGst:
+            donkiRes.ok && !donkiBody.error && Array.isArray(donkiBody.gst)
+              ? { events: donkiBody.gst as Record<string, unknown>[], cache: donkiBody.cache }
+              : undefined,
           last_bundle_at_ms: Date.now(),
           ...(parts.length ? { last_error: parts.join(" · ") } : { last_error: undefined }),
         },

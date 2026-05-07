@@ -38,7 +38,7 @@ export function arcadiaReducer(state: ArcadiaOsStateShape, action: ArcadiaOsActi
             {
               level: "STATE",
               scope: "BOOT",
-              message: `ARCADIA OS session anchored — id=${action.sessionId}`,
+              message: `ARCADIA Space Observation session anchored — id=${action.sessionId}`,
             },
           ],
           state.logs,
@@ -119,6 +119,11 @@ export function arcadiaReducer(state: ArcadiaOsStateShape, action: ArcadiaOsActi
               scope: "NASA",
               message:
                 `[STATE] nasa_cache updated (cached=${mergedNasa.neo?.cache?.hit ?? "?"} feeds). Bundled at=${mergedNasa.last_bundle_at_ms ?? "?"}`,
+            },
+            {
+              level: "SPACE",
+              scope: "FEED",
+              message: `[SPACE] bundle ingested APOD + NEO + Mars + DONKI gst rows=${mergedNasa.donkiGst?.events?.length ?? "?"}`,
             },
           ],
           state.logs,

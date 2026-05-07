@@ -11,12 +11,24 @@ export type SystemStatusOnline = "ONLINE" | "DEGRADED" | "OFFLINE";
 export type ArcadiaView =
   | "dashboard"
   | "nasa"
+  | "science"
+  | "simulations"
   | "system"
   | "logs"
   | "eidolon"
   | "learning";
 
-export type LogLevel = "EVENT" | "STATE" | "SYSTEM" | "AGENT" | "UI" | "WARN" | "ERROR";
+export type LogLevel =
+  | "EVENT"
+  | "STATE"
+  | "SYSTEM"
+  | "AGENT"
+  | "UI"
+  | "WARN"
+  | "ERROR"
+  | "SPACE"
+  | "SCIENCE"
+  | "SIM";
 
 export type LogRecord = {
   ts: number;
@@ -42,10 +54,16 @@ export type NASAFeedSnapshot = {
 
 export type MarsPhotoThumb = Record<string, unknown>;
 
+export type DonkiGstSnapshot = {
+  events: Record<string, unknown>[];
+  cache?: { hit?: boolean; fetched_at_ms?: number };
+};
+
 export type NasaCaches = {
   apod?: NASAApodCached | null;
   neo?: NASAFeedSnapshot | null;
   marsPhotos?: MarsPhotoThumb[];
+  donkiGst?: DonkiGstSnapshot | null;
   last_error?: string;
   last_bundle_at_ms?: number;
 };
