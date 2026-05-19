@@ -1,7 +1,24 @@
 import { Html, useProgress } from "@react-three/drei";
+import { useEffect, useState } from "react";
 
 const CanvasLoader = () => {
-  const { progress } = useProgress();
+  const { progress, active } = useProgress();
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    if (!active || progress >= 100) {
+      const timer = setTimeout(() => setShow(false), 200);
+      return () => clearTimeout(timer);
+    }
+  }, [active, progress]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setShow(false), 12000);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (!show) return null;
+
   return (
     <Html
       as='div'
@@ -22,7 +39,7 @@ const CanvasLoader = () => {
           marginTop: 40,
         }}
       >
-        {progress.toFixed(2)}%
+        {Math.min(100, progress).toFixed(0)}%
       </p>
     </Html>
   );
