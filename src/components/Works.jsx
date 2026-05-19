@@ -75,7 +75,7 @@ const ProjectCard = ({
               />
             </motion.button>
           </motion.div>
-        </motion.div>
+        </div>
 
         <div
           role='button'
@@ -125,13 +125,13 @@ const Works = () => {
           portfolio. Click a project to open the live site; use the GitHub icon for
           the repository.
         </motion.p>
-      </motion.div>
+      </div>
 
       <div className='mt-20 flex flex-wrap gap-7'>
         {projects.map((project, index) => (
           <ProjectCard key={`project-${index}`} index={index} {...project} />
         ))}
-      </motion.div>
+      </div>
     </>
   );
 };
