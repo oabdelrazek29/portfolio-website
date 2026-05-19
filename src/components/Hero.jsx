@@ -44,7 +44,8 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.15 }}
             className={`${styles.heroHeadText} text-white`}
           >
-            Hi, I&apos;m <span className='text-[#f97316]'>Omar</span>
+            Hi, I&apos;m{" "}
+            <span className='text-[#f97316]'>Omar Abdelrazek</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}

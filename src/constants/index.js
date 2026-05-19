@@ -52,7 +52,7 @@ const experiences = [
     company_name: "ARC",
     icon: creator,
     iconBg: "#383E56",
-    date: "March 2025 - Present",
+    date: "March 2026 - Present",
     points: [
       "Built an AI-powered productivity and learning platform from the ground up, handling full-stack architecture, product design, and feature development solo.",
       "Developed core systems including adaptive task organization, contextual search, and AI-assisted knowledge management using Next.js, TypeScript, PostgreSQL, and LLM APIs.",
@@ -64,7 +64,7 @@ const experiences = [
     company_name: "Upwork",
     icon: web,
     iconBg: "#E6DEDD",
-    date: "2024 - Present",
+    date: "2026 - Present",
     points: [
       "Delivering client projects across Python automation, full-stack web development, AI integration, data processing, and workflow tooling.",
       "Built tools ranging from web scrapers and file processors to React interfaces and API integrations depending on what the client actually needs.",
