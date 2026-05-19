@@ -90,19 +90,20 @@ const projects = [
       { name: "PostgreSQL", color: "pink-text-gradient" },
     ],
     image: carrent,
-    source_code_link: "https://github.com/oabdelrazek29",
+    source_code_link: "https://github.com/oabdelrazek29/ARC",
   },
   {
     name: "PRPilot",
     description:
       "A PR automation tool that takes the grunt work out of code review. PRPilot reads your diffs, generates clear pull request descriptions, flags potential issues, and keeps your review history organized.",
     tags: [
-      { name: "Python", color: "blue-text-gradient" },
-      { name: "GitHub API", color: "green-text-gradient" },
+      { name: "Next.js", color: "blue-text-gradient" },
+      { name: "TypeScript", color: "green-text-gradient" },
       { name: "AI", color: "pink-text-gradient" },
     ],
     image: jobit,
-    source_code_link: "https://github.com/oabdelrazek29",
+    live_site_link: "https://pr-pilot-eight.vercel.app",
+    source_code_link: "https://github.com/oabdelrazek29/PRPilot",
   },
   {
     name: "Portfolio Site",
@@ -114,6 +115,7 @@ const projects = [
       { name: "Tailwind CSS", color: "pink-text-gradient" },
     ],
     image: tripguide,
+    live_site_link: "https://portfolio-website-nu-five-55.vercel.app",
     source_code_link: "https://github.com/oabdelrazek29/portfolio-website",
   },
 ];
