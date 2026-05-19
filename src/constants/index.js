@@ -103,7 +103,7 @@ const projects = [
     ],
     image: jobit,
     live_site_link: "https://pr-pilot-eight.vercel.app",
-    source_code_link: "https://github.com/oabdelrazek29/PRPilot",
+    source_code_link: "https://github.com/oabdelrazek29/pr-pilot",
   },
   {
     name: "Portfolio Site",
