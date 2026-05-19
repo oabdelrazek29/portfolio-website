@@ -7,38 +7,43 @@ import CanvasLoader from "../Loader";
 const PLANET_MODEL = "/planet/scene.gltf";
 useGLTF.preload(PLANET_MODEL);
 
-const Earth = () => {
+const Earth = ({ scale = 2.5 }) => {
   const earth = useGLTF(PLANET_MODEL);
 
   return (
-    <primitive object={earth.scene} scale={2.5} position-y={0} rotation-y={0} />
+    <primitive object={earth.scene} scale={scale} position-y={0} rotation-y={0} />
   );
 };
 
-const EarthCanvas = () => {
+const EarthCanvas = ({ variant = "contact", className = "" }) => {
+  const isHero = variant === "hero";
+
   return (
-    <Canvas
-      shadows
-      frameloop='demand'
-      dpr={[1, 1.5]}
-      gl={{ preserveDrawingBuffer: true, powerPreference: "high-performance" }}
-      camera={{
-        fov: 45,
-        near: 0.1,
-        far: 200,
-        position: [-4, 3, 6],
-      }}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          autoRotate
-          enableZoom={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-        />
-        <Earth />
-      </Suspense>
-    </Canvas>
+    <div className={`h-full w-full ${className}`}>
+      <Canvas
+        shadows={!isHero}
+        frameloop='demand'
+        dpr={isHero ? [1, 1] : [1, 1.5]}
+        gl={{ preserveDrawingBuffer: true, powerPreference: "high-performance" }}
+        camera={{
+          fov: isHero ? 50 : 45,
+          near: 0.1,
+          far: 200,
+          position: isHero ? [-3, 2, 5] : [-4, 3, 6],
+        }}
+        className='!h-full !w-full'
+      >
+        <Suspense fallback={isHero ? null : <CanvasLoader />}>
+          <OrbitControls
+            autoRotate
+            enableZoom={false}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+          />
+          <Earth scale={isHero ? 1.85 : 2.5} />
+        </Suspense>
+      </Canvas>
+    </div>
   );
 };
 
