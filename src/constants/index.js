@@ -12,9 +12,9 @@ import {
   nodejs,
   git,
   threejs,
-  carrent,
-  jobit,
-  tripguide,
+  arcLogo,
+  prpilotLogo,
+  portfolioLogo,
 } from "../assets";
 
 export const navLinks = [
@@ -89,7 +89,9 @@ const projects = [
       { name: "TypeScript", color: "green-text-gradient" },
       { name: "PostgreSQL", color: "pink-text-gradient" },
     ],
-    image: carrent,
+    image: arcLogo,
+    imageFit: "contain",
+    live_site_link: "https://arc-oabdelrazek29s-projects.vercel.app",
     source_code_link: "https://github.com/oabdelrazek29/ARC",
   },
   {
@@ -101,7 +103,8 @@ const projects = [
       { name: "TypeScript", color: "green-text-gradient" },
       { name: "AI", color: "pink-text-gradient" },
     ],
-    image: jobit,
+    image: prpilotLogo,
+    imageFit: "contain",
     live_site_link: "https://pr-pilot-eight.vercel.app",
     source_code_link: "https://github.com/oabdelrazek29/pr-pilot",
   },
@@ -114,7 +117,8 @@ const projects = [
       { name: "Three.js", color: "green-text-gradient" },
       { name: "Tailwind CSS", color: "pink-text-gradient" },
     ],
-    image: tripguide,
+    image: portfolioLogo,
+    imageFit: "contain",
     live_site_link: "https://portfolio-website-nu-five-55.vercel.app",
     source_code_link: "https://github.com/oabdelrazek29/portfolio-website",
   },

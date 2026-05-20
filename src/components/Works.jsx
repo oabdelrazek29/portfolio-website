@@ -14,9 +14,11 @@ const ProjectCard = ({
   description,
   tags,
   image,
+  imageFit,
   live_site_link,
   source_code_link,
 }) => {
+  const isLogo = imageFit === "contain";
   const openLive = () => {
     const url = live_site_link || source_code_link;
     if (url) window.open(url, "_blank", "noopener,noreferrer");
@@ -51,12 +53,16 @@ const ProjectCard = ({
               openLive();
             }
           }}
-          className='relative w-full h-[230px] cursor-pointer'
+          className={`relative w-full h-[230px] cursor-pointer rounded-2xl overflow-hidden ${
+            isLogo ? "bg-[#0f0f1a]" : ""
+          }`}
         >
           <img
             src={image}
             alt={name}
-            className='w-full h-full object-cover rounded-2xl'
+            className={`w-full h-full rounded-2xl ${
+              isLogo ? "object-contain p-6" : "object-cover"
+            }`}
           />
 
           <motion.div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
