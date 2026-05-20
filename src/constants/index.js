@@ -16,6 +16,7 @@ import {
   prpilotLogo,
   portfolioLogo,
 } from "../assets";
+import { projectDetails } from "./projectDetails";
 
 export const navLinks = [
   { id: "about", title: "About" },
@@ -93,6 +94,7 @@ const projects = [
     imageFit: "contain",
     live_site_link: "https://arc-oabdelrazek29s-projects.vercel.app",
     source_code_link: "https://github.com/oabdelrazek29/ARC",
+    details: projectDetails.ARC,
   },
   {
     name: "PRPilot",
@@ -107,6 +109,7 @@ const projects = [
     imageFit: "contain",
     live_site_link: "https://pr-pilot-eight.vercel.app",
     source_code_link: "https://github.com/oabdelrazek29/pr-pilot",
+    details: projectDetails.PRPilot,
   },
   {
     name: "Portfolio Site",
@@ -121,6 +124,7 @@ const projects = [
     imageFit: "contain",
     live_site_link: "https://portfolio-website-nu-five-55.vercel.app",
     source_code_link: "https://github.com/oabdelrazek29/portfolio-website",
+    details: projectDetails["Portfolio Site"],
   },
 ];
 
