@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+import logo from "./omar-mark.svg";
 import backend from "./backend.png";
 import creator from "./creator.png";
 import mobile from "./mobile.png";
@@ -29,7 +29,7 @@ import tesla from "./company/tesla.png";
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
-import arcLogo from "./projects/arc-logo.svg";
+import arcLogo from "./projects/arc-logo.png";
 import prpilotLogo from "./projects/prpilot-logo.svg";
 import portfolioLogo from "./projects/portfolio-logo.svg";
 
