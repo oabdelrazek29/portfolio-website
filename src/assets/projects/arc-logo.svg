@@ -2,11 +2,10 @@
   <rect width="400" height="400" rx="24" fill="#0a0a0a"/>
   <defs>
     <linearGradient id="arc-grad" x1="60" y1="320" x2="340" y2="80">
-      <stop offset="0%" stop-color="#c9b99a"/>
-      <stop offset="100%" stop-color="#a89878"/>
+      <stop offset="0%" stop-color="#e8825a"/>
+      <stop offset="100%" stop-color="#d4714a"/>
     </linearGradient>
   </defs>
-  <!-- ArcMark from ARC site (viewBox 40×40, scaled ×10) -->
   <g transform="translate(0, 24)">
     <path
       d="M70 300 C110 120 170 80 200 80 C230 80 290 120 330 300"
@@ -15,11 +14,11 @@
       stroke-linecap="round"
       fill="none"
     />
-    <circle cx="70" cy="300" r="32.5" fill="#c9b99a"/>
-    <circle cx="200" cy="80" r="40" fill="#a89878"/>
-    <circle cx="330" cy="300" r="32.5" fill="#c9b99a"/>
-    <circle cx="130" cy="200" r="20" fill="#c9b99a" opacity="0.55"/>
-    <circle cx="270" cy="200" r="20" fill="#c9b99a" opacity="0.55"/>
+    <circle cx="70" cy="300" r="32.5" fill="#e8825a"/>
+    <circle cx="200" cy="80" r="40" fill="#d4714a"/>
+    <circle cx="330" cy="300" r="32.5" fill="#e8825a"/>
+    <circle cx="130" cy="200" r="20" fill="#e8825a" opacity="0.55"/>
+    <circle cx="270" cy="200" r="20" fill="#e8825a" opacity="0.55"/>
   </g>
   <text
     x="200"

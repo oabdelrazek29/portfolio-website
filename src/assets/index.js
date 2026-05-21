@@ -29,7 +29,7 @@ import tesla from "./company/tesla.png";
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
-import arcLogo from "./projects/arc-logo.png";
+import arcLogo from "./projects/arc-logo.svg";
 import prpilotLogo from "./projects/prpilot-logo.svg";
 import portfolioLogo from "./projects/portfolio-logo.svg";
 
